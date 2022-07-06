@@ -5,8 +5,8 @@
 ## Global
 
 - [x] Package Install
-- [ ] Router Setup
-- [ ] Create Components
+- [x] Router Setup
+- [x] Create Components
 - [ ] HelmetPrivider
 - [ ] Container
 - [ ] Get Api
