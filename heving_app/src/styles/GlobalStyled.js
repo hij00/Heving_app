@@ -1,7 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 
-export const MainStyle = {
+export const mainStyle = {
   color: "crimson",
   padding: "0 120px",
 };

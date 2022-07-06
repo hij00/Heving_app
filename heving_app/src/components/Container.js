@@ -1,3 +1,10 @@
-export const Container = () => {
-  return <>Container</>;
+import styled from "styled-components";
+import { mainStyle } from "../styles/GlobalStyled";
+
+const Section = styled.section`
+  padding: ${mainStyle.padding};
+`;
+
+export const Container = ({ children }) => {
+  return <Section>{children}</Section>;
 };
