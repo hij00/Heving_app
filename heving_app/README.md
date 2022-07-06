@@ -7,7 +7,7 @@
 - [x] Package Install
 - [x] Router Setup
 - [x] Create Components
-- [ ] HelmetPrivider
+- [x] HelmetPrivider
 - [ ] Container
 - [ ] Get Api
 

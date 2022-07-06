@@ -6,7 +6,7 @@ export const MainStyle = {
   padding: "0 120px",
 };
 
-export const GlobalStyle = createGlobalStyle`
+export const GlobalStyled = createGlobalStyle`
 ${reset}
 a{
     text-decoration: none;
