@@ -18,6 +18,10 @@
 
 ## Main Page
 
+- [ ] Main Banner
+- [ ] Contents
+- [ ] Click
+
 ## Detail Page
 
 ## Search Page

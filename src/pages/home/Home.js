@@ -1,37 +1,32 @@
 import { useEffect, useState } from "react";
-import styled from "styled-components";
 import { movieApi, tvApi } from "../../api";
-import { imgUrl, movieNum } from "../../constants";
 import { Loading } from "../../components/Loading";
-
-const Wrap = styled.section`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-const UpComing = styled.div``;
-const Movie = styled.div`
-  width: 70%;
-  height: 80vh;
-`;
-const Tv = styled.div``;
-const TextWrap = styled.div``;
-const Title = styled.h1``;
-const Desc = styled.p``;
+import { MainBanner } from "./MainBanner";
 
 export const Home = () => {
+  const [up, setUp] = useState();
   const [play, setPlay] = useState();
+  const [tvPop, setTvPop] = useState();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const movieData = async () => {
       try {
+        // console.log(movieApi.genre());
+        const {
+          data: { results: upData },
+        } = await movieApi.upComing();
+        setUp(upData);
+
         const {
           data: { results: playData },
         } = await movieApi.nowPlaying();
         setPlay(playData);
-        console.log(tvApi.popular());
+
+        const {
+          data: { results: tvData },
+        } = await tvApi.popular();
+        setTvPop(tvData);
 
         setLoading(false);
       } catch (error) {}
@@ -39,27 +34,15 @@ export const Home = () => {
     movieData();
   }, []);
 
+  console.log(play);
+
   return (
     <>
       {loading ? (
         <Loading />
       ) : (
         <>
-          <Wrap>
-            <UpComing></UpComing>
-            <Movie
-              style={{
-                background: `url(${imgUrl}${play[movieNum].backdrop_path}) no-repeat center/cover`,
-              }}
-            >
-              <TextWrap>
-                <Title>
-                  <Desc></Desc>
-                </Title>
-              </TextWrap>
-            </Movie>
-            <Tv></Tv>
-          </Wrap>
+          <MainBanner play={play} up={up} tvPop={tvPop} />
         </>
       )}
     </>

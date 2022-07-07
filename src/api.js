@@ -12,6 +12,7 @@ export const movieApi = {
   topRated: () => api.get("/movie/top_rated"),
   upComing: () => api.get("/movie/upcoming"),
   nowPlaying: () => api.get("/movie/now_playing"),
+  genre: () => api.get("/genre/movie/list"),
 };
 
 export const tvApi = {
