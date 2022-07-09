@@ -13,7 +13,7 @@ ${reset}
 }
 a{
     text-decoration: none;
-    
+    color: white;
 }
 body{
   font-family: 'Noto Sans KR', sans-serif;

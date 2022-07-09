@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { movieApi, tvApi } from "../../api";
+import { Container } from "../../components/Container";
 import { Loading } from "../../components/Loading";
 import { Click } from "./Click";
 import { MainBanner } from "./MainBanner";
+import { Movies } from "./Movies";
 
 export const Home = () => {
   const [up, setUp] = useState();
@@ -35,9 +37,6 @@ export const Home = () => {
     movieData();
   }, []);
 
-  console.log(play);
-  console.log(tvPop);
-
   return (
     <>
       {loading ? (
@@ -46,6 +45,10 @@ export const Home = () => {
         <>
           <MainBanner play={play} up={up} tvPop={tvPop} />
           <Click />
+          <Container>
+            <Movies movie={play} title="이달의 영화" />
+            <Movies movie={tvPop} title="새로운 에피소드" />
+          </Container>
         </>
       )}
     </>

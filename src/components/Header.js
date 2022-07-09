@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import styled from "styled-components";
 import { mainStyle } from "../styles/GlobalStyled";
+import { Link } from "react-router-dom";
 
 const SHeader = styled.header`
   width: 100%;
@@ -26,7 +27,9 @@ const Wrap = styled.div`
 
 const Logo = styled.h3`
   font-size: 30px;
-  color: ${mainStyle.logoColor};
+  a {
+    color: ${mainStyle.logoColor};
+  }
   font-weight: 900;
 `;
 
@@ -79,7 +82,9 @@ export const Header = () => {
   return (
     <SHeader>
       <Wrap>
-        <Logo>Heving</Logo>
+        <Logo>
+          <Link to={"/"}>Heving</Link>
+        </Logo>
 
         <MenuWrapB bottom={bottom}>
           <Menu>최신 인기</Menu>
