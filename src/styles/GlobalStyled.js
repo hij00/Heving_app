@@ -19,5 +19,6 @@ body{
   font-family: 'Noto Sans KR', sans-serif;
     background-color: black;
     color: white;
+    word-break: keep-all;
 }
 `;

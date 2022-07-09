@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { movieApi, tvApi } from "../../api";
 import { Loading } from "../../components/Loading";
+import { Click } from "./Click";
 import { MainBanner } from "./MainBanner";
 
 export const Home = () => {
@@ -35,6 +36,7 @@ export const Home = () => {
   }, []);
 
   console.log(play);
+  console.log(tvPop);
 
   return (
     <>
@@ -43,6 +45,7 @@ export const Home = () => {
       ) : (
         <>
           <MainBanner play={play} up={up} tvPop={tvPop} />
+          <Click />
         </>
       )}
     </>

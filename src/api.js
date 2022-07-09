@@ -13,6 +13,8 @@ export const movieApi = {
   upComing: () => api.get("/movie/upcoming"),
   nowPlaying: () => api.get("/movie/now_playing"),
   genre: () => api.get("/genre/movie/list"),
+  movieDetail: (id) => api.get(`/movie/${id}`),
+  movieVideo: (id) => api.get(`/movie/${id}/videos`),
 };
 
 export const tvApi = {
