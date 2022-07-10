@@ -22,7 +22,7 @@ const ImgTitle = styled.h3`
   font-weight: 700;
 `;
 
-export const Movies = ({ movie, title }) => {
+export const Tvs = ({ tv, title }) => {
   return (
     <SMovies>
       <Title>{title}</Title>
@@ -32,15 +32,14 @@ export const Movies = ({ movie, title }) => {
         spaceBetween={50}
         slidesPerView={4.5}
       >
-        {movie.map((play) => (
+        {tv.map((play) => (
           <SwiperSlide key={play.id}>
-            <Link to={`/movie_detail/${play.id}`}>
+            <Link to={`/tv_detail/${play.id}`}>
               <Img
                 style={{
                   background: `url(${imgUrl}${play.backdrop_path}) no-repeat center/cover`,
                 }}
               />
-              <ImgTitle>{play.title}</ImgTitle>
               <ImgTitle>{play.name}</ImgTitle>
             </Link>
           </SwiperSlide>

@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import { movieApi, tvApi } from "../../api";
 import { Container } from "../../components/Container";
 import { Loading } from "../../components/Loading";
+import { All } from "./All";
 import { Click } from "./Click";
 import { MainBanner } from "./MainBanner";
 import { Movies } from "./Movies";
+import { Tvs } from "./Tvs";
 
 export const Home = () => {
   const [up, setUp] = useState();
@@ -44,10 +46,11 @@ export const Home = () => {
       ) : (
         <>
           <MainBanner play={play} up={up} tvPop={tvPop} />
-          <Click />
+          <Click play={play} />
           <Container>
+            <All movie={play} tv={tvPop} title="최신 신작" />
             <Movies movie={play} title="이달의 영화" />
-            <Movies movie={tvPop} title="새로운 에피소드" />
+            <Tvs tv={tvPop} title="새로운 에피소드" />
           </Container>
         </>
       )}

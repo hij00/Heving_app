@@ -1,45 +1,63 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { movieApi } from "../../api";
+import { Container } from "../../components/Container";
+import { Loading } from "../../components/Loading";
+import { num } from "../../constants";
 
-const Wrap = styled.section``;
-const Video = styled.div``;
+const IFrame = styled.iframe`
+  width: 100%;
+  height: 700px;
+  margin-top: 100px;
+`;
 const TextWrap = styled.div``;
 const Title = styled.h1``;
 const Desc = styled.h3``;
 const Item = styled.p``;
 
-export const Click = () => {
-  const [mDetail, setMDetail] = useState();
+export const Click = ({ play }) => {
+  const [movieDetail, setMovieDetail] = useState();
+  const [videoData, setVideoData] = useState();
+  const [loading, setLoading] = useState(true);
 
-  //   const movieData = async () => {
-  //     const { data } = await movieApi.movieDetail(453395);
-  //     console.log(data);
-  //   };
-  const params = useParams();
-  //   const { id } = useParams();
-  console.log(params);
+  useEffect(() => {
+    const detailData = async () => {
+      const {
+        data: { results },
+      } = await movieApi.movieVideo(play[num].id);
 
-  //   useEffect(() => {
-  //     const detailData = async () => {
-  //       try {
-  //         const detail = await movieApi.movieDetail(id);
-  //         console.log(detail.data);
-  //         // const { data } = await detail;
-  //       } catch (error) {}
-  //     };
-  //     detailData();
-  //   }, []);
+      try {
+        const detail = await movieApi.movieDetail(play[num].id);
+        const { data } = detail;
+        setMovieDetail(data);
+        setVideoData(results.length === 0 ? null : results[0].key);
+        setLoading(false);
+      } catch (error) {}
+    };
+    detailData();
+  }, []);
 
   return (
-    <Wrap>
-      <Video></Video>
-      <TextWrap>
-        <Title></Title>
-        <Desc></Desc>
-        <Item></Item>
-      </TextWrap>
-    </Wrap>
+    <>
+      {loading ? (
+        <Loading />
+      ) : (
+        <Container>
+          {videoData ? (
+            <IFrame
+              src={`https://www.youtube.com/embed/${videoData}`}
+              allowfullscreen
+            ></IFrame>
+          ) : null}
+          {movieDetail && (
+            <TextWrap>
+              <Title>{movieDetail.title}</Title>
+              <Desc>{movieDetail.overview}</Desc>
+              <Item></Item>
+            </TextWrap>
+          )}
+        </Container>
+      )}
+    </>
   );
 };
