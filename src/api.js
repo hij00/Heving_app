@@ -15,6 +15,12 @@ export const movieApi = {
   genre: () => api.get("/genre/movie/list"),
   movieDetail: (id) => api.get(`/movie/${id}`),
   movieVideo: (id) => api.get(`/movie/${id}/videos`),
+  search: (term) =>
+    api.get(`/search/movie`, {
+      params: {
+        query: term,
+      },
+    }),
 };
 
 export const tvApi = {
