@@ -3,7 +3,6 @@ import { movieApi, tvApi } from "../../api";
 import { Container } from "../../components/Container";
 import { Loading } from "../../components/Loading";
 import { All } from "./All";
-import { Click } from "./Click";
 import { MainBanner } from "./MainBanner";
 import { Movies } from "./Movies";
 import { Tvs } from "./Tvs";
@@ -46,7 +45,7 @@ export const Home = () => {
       ) : (
         <>
           <MainBanner play={play} up={up} tvPop={tvPop} />
-          <Click play={play} />
+
           <Container>
             <All movie={play} tv={tvPop} title="최신 신작" />
             <Movies movie={play} title="이달의 영화" />

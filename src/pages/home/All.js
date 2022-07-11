@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import "swiper/css/navigation";
 import "swiper/css";
 import { Navigation } from "swiper";
+import { useState } from "react";
 
 const SMovies = styled.div`
   margin-top: 100px;
@@ -32,54 +33,76 @@ const Btn = styled.div`
   margin-left: 20px;
   border-radius: 30px;
   line-height: 30px;
+  cursor: pointer;
+`;
+const Movie = styled.div`
+  display: ${[(props) => props.show]};
+`;
+const Tv = styled.div`
+  display: ${[(props) => props.hidden]};
 `;
 
 export const All = ({ movie, tv, title }) => {
+  const [show, setShow] = useState("block");
+  const [hidden, setHidden] = useState("none");
+  const handleClick = () => {
+    setShow("block");
+    setHidden("none");
+  };
+  const clickHandle = () => {
+    setShow("none");
+    setHidden("block");
+  };
+
   return (
     <SMovies>
       <BtnWrap>
         <Title>{title}</Title>
-        <Btn>영화</Btn>
-        <Btn>TV 시리즈</Btn>
+        <Btn onClick={handleClick}>영화</Btn>
+        <Btn onClick={clickHandle}>TV 시리즈</Btn>
       </BtnWrap>
-      <Swiper
-        modules={[Navigation]}
-        navigation
-        spaceBetween={50}
-        slidesPerView={4.5}
-      >
-        {movie.map((play) => (
-          <SwiperSlide key={play.id}>
-            <Link to={`/movie_detail/${play.id}`}>
-              <Img
-                style={{
-                  background: `url(${imgUrl}${play.backdrop_path}) no-repeat center/cover`,
-                }}
-              />
-              <ImgTitle>{play.title}</ImgTitle>
-            </Link>
-          </SwiperSlide>
-        ))}
-      </Swiper>
-      <Swiper
-        modules={[Navigation]}
-        navigation
-        spaceBetween={50}
-        slidesPerView={4.5}
-      >
-        {tv.map((play) => (
-          <SwiperSlide key={play.id}>
-            <Link to={`/tv_detail/${play.id}`}>
-              <Img
-                style={{
-                  background: `url(${imgUrl}${play.backdrop_path}) no-repeat center/cover`,
-                }}
-              />
-              <ImgTitle>{play.name}</ImgTitle>
-            </Link>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+      <Movie show={show}>
+        <Swiper
+          modules={[Navigation]}
+          navigation
+          spaceBetween={50}
+          slidesPerView={4.5}
+        >
+          {movie.map((play) => (
+            <SwiperSlide key={play.id}>
+              <Link to={`/movie_detail/${play.id}`}>
+                <Img
+                  style={{
+                    background: `url(${imgUrl}${play.backdrop_path}) no-repeat center/cover`,
+                  }}
+                />
+                <ImgTitle>{play.title}</ImgTitle>
+              </Link>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </Movie>
+      <Tv hidden={hidden}>
+        <Swiper
+          modules={[Navigation]}
+          navigation
+          spaceBetween={50}
+          slidesPerView={4.5}
+        >
+          {tv.map((play) => (
+            <SwiperSlide key={play.id}>
+              <Link to={`/tv_detail/${play.id}`}>
+                <Img
+                  style={{
+                    background: `url(${imgUrl}${play.backdrop_path}) no-repeat center/cover`,
+                  }}
+                />
+                <ImgTitle>{play.name}</ImgTitle>
+              </Link>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </Tv>
     </SMovies>
   );
 };

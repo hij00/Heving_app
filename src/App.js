@@ -2,7 +2,7 @@ import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
 import { MovieDetail } from "./pages/detail/MovieDetail";
-import { TvDetail } from "./pages/detail/TvDetail";
+import { TvDetail } from "./pages/detail/tvdetail/TvDetail";
 import { Home } from "./pages/home/Home";
 import { Login } from "./pages/login/Login";
 import { NotFound } from "./pages/NotFound";

@@ -3,7 +3,9 @@ import styled from "styled-components";
 import { imgUrl, num } from "../../constants";
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import { mainStyle } from "../../styles/GlobalStyled";
-const Wrap = styled.section`
+import { Click } from "./Click";
+import { useState } from "react";
+const Main = styled.section`
   width: 100%;
   display: flex;
   justify-content: center;
@@ -84,54 +86,69 @@ const ViewBtn = styled.div`
   font-size: 20px;
   line-height: 30px;
   text-align: center;
+  cursor: pointer;
+`;
+const View = styled.section`
+  display: ${(props) => props.click};
 `;
 
 export const MainBanner = ({ play, up, tvPop }) => {
+  const [click, setClick] = useState("none");
+
+  const handleClick = () => {
+    setClick("block");
+  };
+
   return (
-    <Wrap>
-      <Left>
-        <UpComing
-          style={{
-            background: `url(${imgUrl}${up[num].backdrop_path}) no-repeat center/cover`,
-          }}
-        >
+    <>
+      <Main>
+        <Left>
+          <UpComing
+            style={{
+              background: `url(${imgUrl}${up[num].backdrop_path}) no-repeat center/cover`,
+            }}
+          >
+            <Cover />
+            <TextWrap>
+              <STitle>{up[num].title}</STitle>
+              <Desc>{up[num].release_date}</Desc>
+            </TextWrap>
+          </UpComing>
+        </Left>
+        <Center>
+          <Movie
+            style={{
+              background: `url(${imgUrl}${play[num].backdrop_path}) no-repeat center/cover`,
+            }}
+          >
+            <TextWrap>
+              <Title>{play[num].title}</Title>
+              <Desc>{play[num].release_date}</Desc>
+              {/* 장르를 적을때 아이디로 표시되있는거 글로 바꾸는 방법 */}
+            </TextWrap>
+            <Bg />
+            <ViewBtn onClick={handleClick}>
+              <FontAwesomeIcon icon={faAngleDown} />
+            </ViewBtn>
+          </Movie>
+        </Center>
+        <Right>
           <Cover />
-          <TextWrap>
-            <STitle>{up[num].title}</STitle>
-            <Desc>{up[num].release_date}</Desc>
-          </TextWrap>
-        </UpComing>
-      </Left>
-      <Center>
-        <Movie
-          style={{
-            background: `url(${imgUrl}${play[num].backdrop_path}) no-repeat center/cover`,
-          }}
-        >
-          <TextWrap>
-            <Title>{play[num].title}</Title>
-            <Desc>{play[num].release_date}</Desc>
-            {/* 장르를 적을때 아이디로 표시되있는거 글로 바꾸는 방법 */}
-          </TextWrap>
-          <Bg />
-          <ViewBtn>
-            <FontAwesomeIcon icon={faAngleDown} />
-          </ViewBtn>
-        </Movie>
-      </Center>
-      <Right>
-        <Cover />
-        <Tv
-          style={{
-            background: `url(${imgUrl}${tvPop[num].backdrop_path}) no-repeat center/cover`,
-          }}
-        >
-          <TextWrap>
-            <STitle>{tvPop[num].name}</STitle>
-            <Desc>{tvPop[num].first_air_date}</Desc>
-          </TextWrap>
-        </Tv>
-      </Right>
-    </Wrap>
+          <Tv
+            style={{
+              background: `url(${imgUrl}${tvPop[num].backdrop_path}) no-repeat center/cover`,
+            }}
+          >
+            <TextWrap>
+              <STitle>{tvPop[num].name}</STitle>
+              <Desc>{tvPop[num].first_air_date}</Desc>
+            </TextWrap>
+          </Tv>
+        </Right>
+      </Main>
+      <View click={click}>
+        <Click play={play} />
+      </View>
+    </>
   );
 };
