@@ -14,6 +14,7 @@ const SHeader = styled.header`
   position: fixed;
   top: 0;
   z-index: 999;
+  background-color: ${(props) => props.bgColor};
 `;
 
 const Wrap = styled.div`
@@ -79,8 +80,24 @@ const Acc = styled.div`
 export const Header = () => {
   const [top, setTop] = useState("flex");
   const [bottom, setBottom] = useState("none");
+  const [bg, setBg] = useState("none");
+
+  const handleScroll = () => {
+    const scr = window.pageYOffset;
+    if (scr > 700) {
+      setTop("none");
+      setBottom("flex");
+      setBg("black");
+    } else {
+      setTop("flex");
+      setBottom("none");
+      setBg("none");
+    }
+  };
+  window.addEventListener("scroll", handleScroll);
+
   return (
-    <SHeader>
+    <SHeader bgColor={bg}>
       <Wrap>
         <Logo>
           <Link to={"/"}>Heving</Link>

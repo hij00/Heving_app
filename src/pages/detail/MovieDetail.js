@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { movieApi } from "../../api";
 import { Container } from "../../components/Container";
 import { Loading } from "../../components/Loading";
-import { num } from "../../constants";
 
 const IFrame = styled.iframe`
   width: 100%;
