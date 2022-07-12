@@ -1,3 +1,3 @@
-export const Episode = () => {
+export const Episode = ({ seaData }) => {
   return <></>;
 };

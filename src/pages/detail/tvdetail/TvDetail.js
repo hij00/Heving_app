@@ -21,7 +21,6 @@ export const TvDetail = () => {
   const [videoData, setVideoData] = useState();
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
-  const [show, setShow] = useState("none");
 
   useEffect(() => {
     const detailData = async () => {
@@ -49,7 +48,7 @@ export const TvDetail = () => {
         <>
           <MainBanner tvDetail={tvDetail} />
           <Wrap>
-            <Container show={show}>
+            <Container>
               {videoData ? (
                 <IFrame
                   src={`https://www.youtube.com/embed/${videoData}`}

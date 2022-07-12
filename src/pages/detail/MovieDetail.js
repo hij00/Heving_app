@@ -79,7 +79,7 @@ export const MovieDetail = () => {
   const [videoData, setVideoData] = useState();
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
-  const [show, setShow] = useState("block");
+  // const [show, setShow] = useState("block");
 
   useEffect(() => {
     const detailData = async () => {
@@ -99,7 +99,7 @@ export const MovieDetail = () => {
   }, []);
 
   const handleClick = () => {
-    setShow("block");
+    // setShow("block");
     window.scrollTo({
       top: 1000,
       left: 0,

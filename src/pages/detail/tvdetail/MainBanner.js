@@ -3,9 +3,10 @@ import styled from "styled-components";
 import { tvApi } from "../../../api";
 import { Container } from "../../../components/Container";
 import { Loading } from "../../../components/Loading";
-import { imgUrl, num } from "../../../constants";
+import { imgUrl } from "../../../constants";
 import { ScrollTop } from "../../../ScrollTop";
 import { mainStyle } from "../../../styles/GlobalStyled";
+import { Episode } from "./Episode";
 
 const Bg = styled.section`
   width: 100%;
@@ -68,11 +69,12 @@ const Point = styled.div`
   border-radius: 30px 30px 0 0;
   background-color: ${mainStyle.logoColor};
 `;
-const SWrap = styled.div``;
-const Season = styled.div``;
+const Form = styled.form``;
+const Select = styled.select``;
+const Option = styled.option``;
 
 export const MainBanner = ({ tvDetail }) => {
-  const [show, setShow] = useState("none");
+  // const [show, setShow] = useState("none");
   // 다른 컴포넌트와 클릭이벤트 연동하는방법(예고편 보기 눌렀을때 해당페이지 뜨면서 스크롤 이동)
   const [seaData, setSeaData] = useState();
   const [loading, setLoading] = useState(true);
@@ -95,13 +97,16 @@ export const MainBanner = ({ tvDetail }) => {
   }, []);
 
   const handleClick = () => {
-    setShow("block");
+    // setShow("block");
     window.scrollTo({
       top: 1000,
       left: 0,
       behavior: "smooth",
     });
   };
+
+  // console.log(seaData);
+
   return (
     <>
       <ScrollTop />
@@ -121,15 +126,13 @@ export const MainBanner = ({ tvDetail }) => {
                     <Title>{tvDetail.name}</Title>
                     <ItemWrap>
                       <Item>{tvDetail.first_air_date}</Item>
-                      <SWrap>
-                        {season.map((play) => (
-                          <Season key={play.id}>
-                            시즌 {play.season_number}
-                          </Season>
-                        ))}
-                      </SWrap>
-                      <form onSubmit={handleSubmit(changeSeason)}></form>
-                      <Item>총 회</Item>
+                      <Form>
+                        <Select name="season">
+                          {season.map((play) => (
+                            <Option key={play.id}>{play.name}</Option>
+                          ))}
+                        </Select>
+                      </Form>
                     </ItemWrap>
                     <Desc>{tvDetail.overview}</Desc>
                   </TextWrap>
@@ -151,6 +154,7 @@ export const MainBanner = ({ tvDetail }) => {
               </MenuWrap>
             </BlackBg>
           </Bg>
+          <Episode seaData={seaData} />
         </>
       )}
     </>

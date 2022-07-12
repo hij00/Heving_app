@@ -53,7 +53,7 @@ export const All = ({ movie, tv, title }) => {
     setShow("none");
     setHidden("block");
   };
-
+  console.log(tv);
   return (
     <SMovies>
       <BtnWrap>

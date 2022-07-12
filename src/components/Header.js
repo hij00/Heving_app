@@ -9,7 +9,6 @@ import styled from "styled-components";
 import { mainStyle } from "../styles/GlobalStyled";
 import { Link } from "react-router-dom";
 import { Container } from "./Container";
-import { StyleSheetConsumer } from "styled-components";
 
 const SHeader = styled.header`
   width: 100%;
