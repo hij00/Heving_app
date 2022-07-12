@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
+import { tvApi } from "../../../api";
 import { Container } from "../../../components/Container";
-import { imgUrl } from "../../../constants";
+import { imgUrl, num } from "../../../constants";
 import { mainStyle } from "../../../styles/GlobalStyled";
 
 const Bg = styled.section`
@@ -65,8 +66,10 @@ const Point = styled.div`
   border-radius: 30px 30px 0 0;
   background-color: ${mainStyle.logoColor};
 `;
+const SWrap = styled.div``;
+const Season = styled.div``;
 
-export const MainBanner = ({ tvDetail }) => {
+export const MainBanner = ({ tvDetail, season }) => {
   const [show, setShow] = useState("none");
   // 다른 컴포넌트와 클릭이벤트 연동하는방법(예고편 보기 눌렀을때 해당페이지 뜨면서 스크롤 이동)
 
@@ -78,12 +81,11 @@ export const MainBanner = ({ tvDetail }) => {
       behavior: "smooth",
     });
   };
-
   return (
     <>
       <Bg
         style={{
-          background: `url(${imgUrl}${tvDetail.backdrop_path})`,
+          background: `url(${imgUrl}${tvDetail.backdrop_path}) no-repeat center / cover`,
         }}
       >
         <BlackBg>
@@ -96,6 +98,11 @@ export const MainBanner = ({ tvDetail }) => {
                   <Item>총 {tvDetail.number_of_episodes}회</Item>
                 </ItemWrap>
                 <Desc>{tvDetail.overview}</Desc>
+                {/* <SWrap>
+                  {season.map((play) => (
+                    <Season key={play.id}>시즌 {play.season_number}</Season>
+                  ))}
+                </SWrap> */}
               </TextWrap>
             )}
           </Container>

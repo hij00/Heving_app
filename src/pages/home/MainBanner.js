@@ -87,16 +87,18 @@ const ViewBtn = styled.div`
   line-height: 30px;
   text-align: center;
   cursor: pointer;
+  z-index: 99;
 `;
 const View = styled.section`
-  display: ${(props) => props.click};
+  display: ${(props) => props.show};
 `;
 
 export const MainBanner = ({ play, up, tvPop }) => {
-  const [click, setClick] = useState("none");
+  const [show, setShow] = useState("none");
 
   const handleClick = () => {
-    setClick("block");
+    // console.log(123);
+    setShow("block");
   };
 
   return (
@@ -128,6 +130,7 @@ export const MainBanner = ({ play, up, tvPop }) => {
             </TextWrap>
             <Bg />
             <ViewBtn onClick={handleClick}>
+              {/* 제일 위에 있어야 클릭 이벤트 적용됨 */}
               <FontAwesomeIcon icon={faAngleDown} />
             </ViewBtn>
           </Movie>
@@ -146,7 +149,7 @@ export const MainBanner = ({ play, up, tvPop }) => {
           </Tv>
         </Right>
       </Main>
-      <View click={click}>
+      <View show={show}>
         <Click play={play} />
       </View>
     </>

@@ -17,7 +17,7 @@ const Wrap = styled.div`
 `;
 
 export const TvDetail = () => {
-  const [tvDetail, settvDetail] = useState();
+  const [tvDetail, setTvDetail] = useState();
   const [videoData, setVideoData] = useState();
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
@@ -32,17 +32,13 @@ export const TvDetail = () => {
       try {
         const detail = await tvApi.tvDetail(id);
         const { data } = detail;
-        settvDetail(data);
+        setTvDetail(data);
         setVideoData(results.length === 0 ? null : results[0].key);
         setLoading(false);
       } catch (error) {}
     };
     detailData();
   }, []);
-  // console.log(tvDetail.number_of_episodes);
-  // const season = tvDetail.number_of_seasons;
-  // const episode = tvDetail.number_of_episodes;
-  // console.log(tvApi.tvEpisode(id, season, episode));
 
   return (
     <>

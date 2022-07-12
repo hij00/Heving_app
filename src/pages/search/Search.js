@@ -1,12 +1,20 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { movieApi } from "../../api";
 import { Container } from "../../components/Container";
-import { mainStyle } from "../../styles/GlobalStyled";
+import { Loading } from "../../components/Loading";
+import { imgUrl } from "../../constants";
 
 const SearchWrap = styled.div`
-  margin-top: 150px;
+  margin: 350px 0 150px 0;
+`;
+
+const Form = styled.form`
+  &:nth-child(2) {
+    font-size: 50px;
+  }
 `;
 
 const Input = styled.input`
@@ -17,9 +25,48 @@ const Input = styled.input`
   padding: 20px;
   box-sizing: border-box;
   font-size: 20px;
+  margin-bottom: 20px;
   &::placeholder {
     font-size: 20px;
+    color: black;
   }
+  /* &:required {
+    font-size: 50px;
+  } */
+  color: black;
+`;
+
+const ConWrap = styled.div`
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  column-gap: 30px;
+  row-gap: 50px;
+`;
+
+const Con = styled.div`
+  /* width: 200px;
+  height: 300px; */
+`;
+
+const Bg = styled.div`
+  height: 400px;
+`;
+
+const TextWrap = styled.div``;
+
+const TitleWrap = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+`;
+
+const Title = styled.h3`
+  font-size: 22px;
+`;
+
+const Item = styled.p`
+  font-size: 16px;
+  opacity: 0.7;
 `;
 
 export const Search = () => {
@@ -52,12 +99,12 @@ export const Search = () => {
       setLoading(false);
     } catch (error) {}
   };
-  console.log(errors);
+  console.log(scMovie);
 
   return (
     <Container>
       <SearchWrap>
-        <form onSubmit={handleSubmit(searchMovie)}>
+        <Form onSubmit={handleSubmit(searchMovie)}>
           <Input
             {...register("search", {
               required: "검색어를 입력하셔야 합니다.",
@@ -67,10 +114,43 @@ export const Search = () => {
             })}
             type="text"
             placeholder="검색어를 입력해주세요"
-            {...errors?.search?.message}
           />
-        </form>
+          {errors?.search?.message}
+        </Form>
       </SearchWrap>
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          {scMovie && (
+            <>
+              <ConWrap>
+                {scMovie.map((movie) => (
+                  <>
+                    <Con key={movie.id}>
+                      <Link to={`/movie_detail/${movie.id}`}>
+                        <Bg
+                          style={{
+                            background: `url(${imgUrl}${movie.backdrop_path}) no-repeat center / cover`,
+                          }}
+                        ></Bg>
+                      </Link>
+
+                      <TextWrap>
+                        <TitleWrap>
+                          <Title>{movie.title}</Title>
+                          <Item>{movie.original_language}</Item>
+                        </TitleWrap>
+                        <Item>{movie.release_date}</Item>
+                      </TextWrap>
+                    </Con>
+                  </>
+                ))}
+              </ConWrap>
+            </>
+          )}
+        </>
+      )}
     </Container>
   );
 };

@@ -8,6 +8,8 @@ import { useState } from "react";
 import styled from "styled-components";
 import { mainStyle } from "../styles/GlobalStyled";
 import { Link } from "react-router-dom";
+import { Container } from "./Container";
+import { StyleSheetConsumer } from "styled-components";
 
 const SHeader = styled.header`
   width: 100%;
@@ -20,7 +22,6 @@ const SHeader = styled.header`
 const Wrap = styled.div`
   width: 100%;
   height: 80px;
-  padding: ${mainStyle.padding};
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -49,7 +50,6 @@ const Menu = styled.li`
   svg {
     color: ${mainStyle.logoColor};
     font-size: 20px;
-    margin: 0 10px;
   }
   display: flex;
   justify-content: center;
@@ -60,7 +60,11 @@ const MenuWrapT = styled.ul`
   display: ${(props) => props.top};
   justify-content: space-between;
   align-items: center;
-  padding: 0 10px;
+`;
+
+const Text = styled.h3`
+  margin: 0 10px;
+  opacity: 0.7;
 `;
 
 const IconWrap = styled.div`
@@ -76,6 +80,8 @@ const Acc = styled.div`
   height: 30px;
   margin-left: 50px;
 `;
+
+const SearchIcon = styled.div``;
 
 export const Header = () => {
   const [top, setTop] = useState("flex");
@@ -98,31 +104,37 @@ export const Header = () => {
 
   return (
     <SHeader bgColor={bg}>
-      <Wrap>
-        <Logo>
-          <Link to={"/"}>Heving</Link>
-        </Logo>
+      <Container>
+        <Wrap>
+          <Logo>
+            <Link to={"/"}>Heving</Link>
+          </Logo>
 
-        <MenuWrapB bottom={bottom}>
-          <Menu>최신 인기</Menu>
-          <Menu>영화</Menu>
-          <Menu>TV시리즈</Menu>
-        </MenuWrapB>
-        <IconWrap>
-          <FontAwesomeIcon icon={faSearch} />
-          <Acc></Acc>
-        </IconWrap>
-      </Wrap>
-      <MenuWrapT top={top}>
-        <Menu>
-          <FontAwesomeIcon icon={faAngleLeft} />
-          최신 인기
-        </Menu>
-        <Menu>
-          TV시리즈
-          <FontAwesomeIcon icon={faAngleRight} />
-        </Menu>
-      </MenuWrapT>
+          <MenuWrapB bottom={bottom}>
+            <Menu>최신 인기</Menu>
+            <Menu>영화</Menu>
+            <Menu>TV시리즈</Menu>
+          </MenuWrapB>
+          <IconWrap>
+            <SearchIcon>
+              <Link to={"/search"}>
+                <FontAwesomeIcon icon={faSearch} />
+              </Link>
+            </SearchIcon>
+            <Acc></Acc>
+          </IconWrap>
+        </Wrap>
+        <MenuWrapT top={top}>
+          <Menu>
+            <FontAwesomeIcon icon={faAngleLeft} />
+            <Text>최신 인기</Text>
+          </Menu>
+          <Menu>
+            TV시리즈
+            <FontAwesomeIcon icon={faAngleRight} />
+          </Menu>
+        </MenuWrapT>
+      </Container>
     </SHeader>
   );
 };
