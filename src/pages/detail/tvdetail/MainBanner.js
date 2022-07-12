@@ -94,8 +94,6 @@ export const MainBanner = ({ tvDetail }) => {
     seasonData();
   }, []);
 
-  console.log(seaData);
-
   const handleClick = () => {
     setShow("block");
     window.scrollTo({
@@ -123,15 +121,17 @@ export const MainBanner = ({ tvDetail }) => {
                     <Title>{tvDetail.name}</Title>
                     <ItemWrap>
                       <Item>{tvDetail.first_air_date}</Item>
-                      <Item>시즌 </Item>
-                      {/* <Item>총 {seaData.length}회</Item> */}
+                      <SWrap>
+                        {season.map((play) => (
+                          <Season key={play.id}>
+                            시즌 {play.season_number}
+                          </Season>
+                        ))}
+                      </SWrap>
+                      <form onSubmit={handleSubmit(changeSeason)}></form>
+                      <Item>총 회</Item>
                     </ItemWrap>
                     <Desc>{tvDetail.overview}</Desc>
-                    <SWrap>
-                      {season.map((play) => (
-                        <Season key={play.id}>시즌 {play.season_number}</Season>
-                      ))}
-                    </SWrap>
                   </TextWrap>
                 )}
               </Container>

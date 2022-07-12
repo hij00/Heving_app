@@ -98,6 +98,7 @@ export const MainBanner = ({ play, up, tvPop }) => {
 
   const handleClick = () => {
     // console.log(123);
+    // 클릭했을때 적용 안되면 콘솔로 아무거나 찍어서 이벤트가 적용되는지 확인해보기
     setShow("block");
   };
 
