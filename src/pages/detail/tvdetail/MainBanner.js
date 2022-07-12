@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { tvApi } from "../../../api";
 import { Container } from "../../../components/Container";
+import { Loading } from "../../../components/Loading";
 import { imgUrl, num } from "../../../constants";
+import { ScrollTop } from "../../../ScrollTop";
 import { mainStyle } from "../../../styles/GlobalStyled";
 
 const Bg = styled.section`
@@ -69,9 +71,30 @@ const Point = styled.div`
 const SWrap = styled.div``;
 const Season = styled.div``;
 
-export const MainBanner = ({ tvDetail, season }) => {
+export const MainBanner = ({ tvDetail }) => {
   const [show, setShow] = useState("none");
   // 다른 컴포넌트와 클릭이벤트 연동하는방법(예고편 보기 눌렀을때 해당페이지 뜨면서 스크롤 이동)
+  const [seaData, setSeaData] = useState();
+  const [loading, setLoading] = useState(true);
+  const season = tvDetail.seasons;
+
+  useEffect(() => {
+    const seasonData = async () => {
+      try {
+        const {
+          data: { episodes },
+        } = await tvApi.tvSeason(
+          tvDetail.id,
+          season.map((a) => a.season_number)
+        );
+        setSeaData(episodes);
+        setLoading(false);
+      } catch (error) {}
+    };
+    seasonData();
+  }, []);
+
+  console.log(seaData);
 
   const handleClick = () => {
     setShow("block");
@@ -83,45 +106,53 @@ export const MainBanner = ({ tvDetail, season }) => {
   };
   return (
     <>
-      <Bg
-        style={{
-          background: `url(${imgUrl}${tvDetail.backdrop_path}) no-repeat center / cover`,
-        }}
-      >
-        <BlackBg>
-          <Container>
-            {tvDetail && (
-              <TextWrap>
-                <Title>{tvDetail.name}</Title>
-                <ItemWrap>
-                  <Item>{tvDetail.first_air_date}</Item>
-                  <Item>총 {tvDetail.number_of_episodes}회</Item>
-                </ItemWrap>
-                <Desc>{tvDetail.overview}</Desc>
-                {/* <SWrap>
-                  {season.map((play) => (
-                    <Season key={play.id}>시즌 {play.season_number}</Season>
-                  ))}
-                </SWrap> */}
-              </TextWrap>
-            )}
-          </Container>
-          <MenuWrap>
-            <Menu>
-              회차
-              <Point />
-            </Menu>
-            <Menu onClick={handleClick}>
-              예고편
-              <Point />
-            </Menu>
-            <Menu>
-              비슷한 컨텐츠
-              <Point />
-            </Menu>
-          </MenuWrap>
-        </BlackBg>
-      </Bg>
+      <ScrollTop />
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          <Bg
+            style={{
+              background: `url(${imgUrl}${tvDetail.backdrop_path}) no-repeat center / cover`,
+            }}
+          >
+            <BlackBg>
+              <Container>
+                {tvDetail && (
+                  <TextWrap>
+                    <Title>{tvDetail.name}</Title>
+                    <ItemWrap>
+                      <Item>{tvDetail.first_air_date}</Item>
+                      <Item>시즌 </Item>
+                      {/* <Item>총 {seaData.length}회</Item> */}
+                    </ItemWrap>
+                    <Desc>{tvDetail.overview}</Desc>
+                    <SWrap>
+                      {season.map((play) => (
+                        <Season key={play.id}>시즌 {play.season_number}</Season>
+                      ))}
+                    </SWrap>
+                  </TextWrap>
+                )}
+              </Container>
+              <MenuWrap>
+                <Menu>
+                  회차
+                  <Point />
+                </Menu>
+                <Menu onClick={handleClick}>
+                  예고편
+                  <Point />
+                </Menu>
+                <Menu>
+                  비슷한 컨텐츠
+                  <Point />
+                </Menu>
+              </MenuWrap>
+            </BlackBg>
+          </Bg>
+        </>
+      )}
     </>
   );
 };
