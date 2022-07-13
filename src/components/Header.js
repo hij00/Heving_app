@@ -110,9 +110,15 @@ export const Header = () => {
           </Logo>
 
           <MenuWrapB bottom={bottom}>
-            <Menu>최신 인기</Menu>
-            <Menu>영화</Menu>
-            <Menu>TV시리즈</Menu>
+            <Menu>
+              <Link to={""}>최신인기</Link>
+            </Menu>
+            <Menu>
+              <Link to={""}>영화</Link>
+            </Menu>
+            <Menu>
+              <Link to={""}>TV시리즈</Link>
+            </Menu>
           </MenuWrapB>
           <IconWrap>
             <SearchIcon>
@@ -126,10 +132,14 @@ export const Header = () => {
         <MenuWrapT top={top}>
           <Menu>
             <FontAwesomeIcon icon={faAngleLeft} />
-            <Text>최신 인기</Text>
+            <Text>
+              <Link to={""}>최신인기</Link>
+            </Text>
           </Menu>
           <Menu>
-            TV시리즈
+            <Text>
+              <Link to={""}>TV시리즈</Link>
+            </Text>
             <FontAwesomeIcon icon={faAngleRight} />
           </Menu>
         </MenuWrapT>

@@ -5,6 +5,7 @@ import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import { mainStyle } from "../../styles/GlobalStyled";
 import { Click } from "./Click";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 const Main = styled.section`
   width: 100%;
   display: flex;
@@ -106,48 +107,54 @@ export const MainBanner = ({ play, up, tvPop }) => {
     <>
       <Main>
         <Left>
-          <UpComing
-            style={{
-              background: `url(${imgUrl}${up[num].backdrop_path}) no-repeat center/cover`,
-            }}
-          >
-            <Cover />
-            <TextWrap>
-              <STitle>{up[num].title}</STitle>
-              <Desc>{up[num].release_date}</Desc>
-            </TextWrap>
-          </UpComing>
+          <Link to={"/movie_all/:id"}>
+            <UpComing
+              style={{
+                background: `url(${imgUrl}${up[num].backdrop_path}) no-repeat center/cover`,
+              }}
+            >
+              <Cover />
+              <TextWrap>
+                <STitle>{up[num].title}</STitle>
+                <Desc>{up[num].release_date}</Desc>
+              </TextWrap>
+            </UpComing>
+          </Link>
         </Left>
         <Center>
-          <Movie
-            style={{
-              background: `url(${imgUrl}${play[num].backdrop_path}) no-repeat center/cover`,
-            }}
-          >
-            <TextWrap>
-              <Title>{play[num].title}</Title>
-              <Desc>{play[num].release_date}</Desc>
-              {/* 장르를 적을때 아이디로 표시되있는거 글로 바꾸는 방법 */}
-            </TextWrap>
-            <Bg />
-            <ViewBtn onClick={handleClick}>
-              {/* 제일 위에 있어야 클릭 이벤트 적용됨 */}
-              <FontAwesomeIcon icon={faAngleDown} />
-            </ViewBtn>
-          </Movie>
+          <Link to={"/movie_detail/:id"}>
+            <Movie
+              style={{
+                background: `url(${imgUrl}${play[num].backdrop_path}) no-repeat center/cover`,
+              }}
+            >
+              <TextWrap>
+                <Title>{play[num].title}</Title>
+                <Desc>{play[num].release_date}</Desc>
+                {/* 장르를 적을때 아이디로 표시되있는거 글로 바꾸는 방법 */}
+              </TextWrap>
+              <Bg />
+              <ViewBtn onClick={handleClick}>
+                {/* 제일 위에 있어야 클릭 이벤트 적용됨 */}
+                <FontAwesomeIcon icon={faAngleDown} />
+              </ViewBtn>
+            </Movie>
+          </Link>
         </Center>
         <Right>
-          <Cover />
-          <Tv
-            style={{
-              background: `url(${imgUrl}${tvPop[num].backdrop_path}) no-repeat center/cover`,
-            }}
-          >
-            <TextWrap>
-              <STitle>{tvPop[num].name}</STitle>
-              <Desc>{tvPop[num].first_air_date}</Desc>
-            </TextWrap>
-          </Tv>
+          <Link to={"/tv_all/:id"}>
+            <Cover />
+            <Tv
+              style={{
+                background: `url(${imgUrl}${tvPop[num].backdrop_path}) no-repeat center/cover`,
+              }}
+            >
+              <TextWrap>
+                <STitle>{tvPop[num].name}</STitle>
+                <Desc>{tvPop[num].first_air_date}</Desc>
+              </TextWrap>
+            </Tv>
+          </Link>
         </Right>
       </Main>
       <View show={show}>

@@ -19,8 +19,8 @@
 ## Main Page
 
 - [ ] Main Banner
-- [ ] Contents
-- [ ] Click
+- [x] Contents
+- [x] Click
 
 ## Detail Page
 

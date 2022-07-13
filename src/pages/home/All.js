@@ -39,21 +39,21 @@ const Movie = styled.div`
   display: ${[(props) => props.show]};
 `;
 const Tv = styled.div`
-  display: ${[(props) => props.hidden]};
+  display: ${[(props) => props.sshow]};
 `;
 
 export const All = ({ movie, tv, title }) => {
   const [show, setShow] = useState("block");
-  const [hidden, setHidden] = useState("none");
+  const [sshow, setSshow] = useState("none");
   const handleClick = () => {
     setShow("block");
-    setHidden("none");
+    setSshow("none");
   };
   const clickHandle = () => {
     setShow("none");
-    setHidden("block");
+    setSshow("block");
   };
-  console.log(tv);
+
   return (
     <SMovies>
       <BtnWrap>
@@ -82,7 +82,7 @@ export const All = ({ movie, tv, title }) => {
           ))}
         </Swiper>
       </Movie>
-      <Tv hidden={hidden}>
+      <Tv sshow={sshow}>
         <Swiper
           modules={[Navigation]}
           navigation
