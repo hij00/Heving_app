@@ -122,24 +122,22 @@ export const MainBanner = ({ play, up, tvPop }) => {
           </Link>
         </Left>
         <Center>
-          <Link to={"/movie_detail/:id"}>
-            <Movie
-              style={{
-                background: `url(${imgUrl}${play[num].backdrop_path}) no-repeat center/cover`,
-              }}
-            >
-              <TextWrap>
-                <Title>{play[num].title}</Title>
-                <Desc>{play[num].release_date}</Desc>
-                {/* 장르를 적을때 아이디로 표시되있는거 글로 바꾸는 방법 */}
-              </TextWrap>
-              <Bg />
-              <ViewBtn onClick={handleClick}>
-                {/* 제일 위에 있어야 클릭 이벤트 적용됨 */}
-                <FontAwesomeIcon icon={faAngleDown} />
-              </ViewBtn>
-            </Movie>
-          </Link>
+          <Movie
+            style={{
+              background: `url(${imgUrl}${play[num].backdrop_path}) no-repeat center/cover`,
+            }}
+          >
+            <TextWrap>
+              <Title>{play[num].title}</Title>
+              <Desc>{play[num].release_date}</Desc>
+              {/* 장르를 적을때 아이디로 표시되있는거 글로 바꾸는 방법 */}
+            </TextWrap>
+            <Bg />
+            <ViewBtn onClick={handleClick}>
+              {/* 제일 위에 있어야 클릭 이벤트 적용됨 */}
+              <FontAwesomeIcon icon={faAngleDown} />
+            </ViewBtn>
+          </Movie>
         </Center>
         <Right>
           <Link to={"/tv_all/:id"}>

@@ -31,7 +31,7 @@ const BlackBg = styled.div`
   justify-content: space-between;
 `;
 const TextWrap = styled.div`
-  max-width: 700px;
+  max-width: 800px;
   padding-top: 250px;
 `;
 const Title = styled.h1`
@@ -42,16 +42,39 @@ const Desc = styled.h3`
   font-size: 18px;
   font-weight: 500;
   line-height: 30px;
+  margin-top: 70px;
 `;
 const ItemWrap = styled.ul`
   display: flex;
   align-items: center;
-  margin: 20px 0 70px 0;
+  margin: 20px 0;
 `;
 const Item = styled.li`
   font-size: 16px;
   font-weight: 700;
   margin-right: 20px;
+  margin-bottom: 10px;
+  opacity: 0.7;
+  display: flex;
+  justify-content: space-between;
+`;
+const Itemm = styled.li`
+  font-size: 16px;
+  font-weight: 700;
+  color: ${mainStyle.logoColor};
+  margin-right: 20px;
+  margin-bottom: 10px;
+  opacity: 0.5;
+  display: flex;
+  justify-content: space-between;
+`;
+const Text = styled.h3`
+  font-size: 18px;
+  font-weight: 500;
+  margin-right: 10px;
+  padding: 8px;
+  border: 1px solid white;
+  border-radius: 10px;
 `;
 const MenuWrap = styled.ul`
   display: flex;
@@ -75,7 +98,7 @@ const Point = styled.div`
 `;
 
 export const MovieDetail = () => {
-  const [movieDetail, setMovieDetail] = useState();
+  const [movieData, setMovieData] = useState();
   const [videoData, setVideoData] = useState();
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
@@ -88,15 +111,17 @@ export const MovieDetail = () => {
       } = await movieApi.movieVideo(id);
 
       try {
-        const detail = await movieApi.movieDetail(id);
-        const { data } = detail;
-        setMovieDetail(data);
+        const { data: detail } = await movieApi.movieDetail(id);
+        setMovieData(detail);
+
         setVideoData(results.length === 0 ? null : results[0].key);
+
         setLoading(false);
       } catch (error) {}
     };
     detailData();
   }, []);
+  console.log(movieData);
 
   const handleClick = () => {
     // setShow("block");
@@ -116,19 +141,30 @@ export const MovieDetail = () => {
         <>
           <Poster
             style={{
-              background: `url(${imgUrl}${movieDetail.backdrop_path}) no-repeat center/cover`,
+              background: `url(${imgUrl}${movieData.backdrop_path}) no-repeat center/cover`,
             }}
           >
             <BlackBg>
               <Container>
-                {movieDetail && (
+                {movieData && (
                   <TextWrap>
-                    <Title>{movieDetail.title}</Title>
+                    <Itemm>{movieData.original_title}</Itemm>
+
+                    <Title>{movieData.title}</Title>
+
                     <ItemWrap>
-                      <Item>{movieDetail.release_date}</Item>
-                      <Item>{movieDetail.runtime}분</Item>
+                      <Item>{movieData.release_date}</Item>
+                      <Item>{movieData.runtime}분</Item>
                     </ItemWrap>
-                    <Desc>{movieDetail.overview}</Desc>
+
+                    <Desc>{movieData.overview}</Desc>
+                    <ItemWrap>
+                      <Item>
+                        {movieData.genres.map((a) => (
+                          <Text key={a.id}>{a.name}</Text>
+                        ))}
+                      </Item>
+                    </ItemWrap>
                   </TextWrap>
                 )}
               </Container>

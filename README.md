@@ -19,8 +19,10 @@
 ## Main Page
 
 - [ ] Main Banner
+- [ ] Main Banner Link
+- [ ] Main Banner Click
 - [x] Contents
-- [x] Click
+- [x] Click css
 
 ## Detail Page
 

@@ -114,10 +114,10 @@ export const Header = () => {
               <Link to={""}>최신인기</Link>
             </Menu>
             <Menu>
-              <Link to={""}>영화</Link>
+              <Link to={"/movie_all"}>영화</Link>
             </Menu>
             <Menu>
-              <Link to={""}>TV시리즈</Link>
+              <Link to={"/tv_all"}>TV시리즈</Link>
             </Menu>
           </MenuWrapB>
           <IconWrap>

@@ -9,8 +9,8 @@ import { NotFound } from "./pages/NotFound";
 import { Search } from "./pages/search/Search";
 import { HelmetProvider } from "react-helmet-async";
 import { GlobalStyled } from "./styles/GlobalStyled";
-import { Movie } from "./pages/menus/Movie";
-import { TvSeries } from "./pages/menus/TvSeries";
+import { MovieAll } from "./pages/menus/movie/MovieAll";
+import { TvSeriesAll } from "./pages/menus/tv_series/TvSeriesAll";
 
 function App() {
   return (
@@ -22,8 +22,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/tv_detail/:id" element={<TvDetail />} />
           <Route path="/movie_detail/:id" element={<MovieDetail />} />
-          <Route path="/movie_all/:id" element={<Movie />} />
-          <Route path="/tv_all/:id" element={<TvSeries />} />
+          <Route path="/movie_all" element={<MovieAll />} />
+          <Route path="/tv_all" element={<TvSeriesAll />} />
           <Route path="/search" element={<Search />} />
           <Route path="/*" element={<NotFound />} />
           <Route path="/login" element={<Login />} />
