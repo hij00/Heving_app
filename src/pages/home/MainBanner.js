@@ -107,10 +107,14 @@ export const MainBanner = ({ play, up, tvPop }) => {
     <>
       <Main>
         <Left>
-          <Link to={"/movie_all/:id"}>
+          <Link to={"/movie_all"}>
             <UpComing
               style={{
-                background: `url(${imgUrl}${up[num].backdrop_path}) no-repeat center/cover`,
+                background: `url(${
+                  up[num].backdrop_path
+                    ? `${imgUrl}${up[num].backdrop_path}`
+                    : "https://mapandan.gov.ph/wp-content/uploads/2018/03/no_image.jpg"
+                }) no-repeat center / cover`,
               }}
             >
               <Cover />
@@ -124,8 +128,13 @@ export const MainBanner = ({ play, up, tvPop }) => {
         <Center>
           <Movie
             style={{
-              background: `url(${imgUrl}${play[num].backdrop_path}) no-repeat center/cover`,
+              background: `url(${
+                play[num].backdrop_path
+                  ? `${imgUrl}${play[num].backdrop_path}`
+                  : "https://mapandan.gov.ph/wp-content/uploads/2018/03/no_image.jpg"
+              }) no-repeat center / cover`,
             }}
+            onClick={handleClick}
           >
             <TextWrap>
               <Title>{play[num].title}</Title>
@@ -140,11 +149,15 @@ export const MainBanner = ({ play, up, tvPop }) => {
           </Movie>
         </Center>
         <Right>
-          <Link to={"/tv_all/:id"}>
+          <Link to={"/tv_all"}>
             <Cover />
             <Tv
               style={{
-                background: `url(${imgUrl}${tvPop[num].backdrop_path}) no-repeat center/cover`,
+                background: `url(${
+                  tvPop[num].backdrop_path
+                    ? `${imgUrl}${tvPop[num].backdrop_path}`
+                    : "https://mapandan.gov.ph/wp-content/uploads/2018/03/no_image.jpg"
+                }) no-repeat center / cover`,
               }}
             >
               <TextWrap>

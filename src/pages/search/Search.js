@@ -131,7 +131,11 @@ export const Search = () => {
                       <Link to={`/movie_detail/${movie.id}`}>
                         <Bg
                           style={{
-                            background: `url(${imgUrl}${movie.backdrop_path}) no-repeat center / cover`,
+                            background: `url(${
+                              movie.backdrop_path
+                                ? `${imgUrl}${movie.backdrop_path}`
+                                : "https://mapandan.gov.ph/wp-content/uploads/2018/03/no_image.jpg"
+                            }) no-repeat center / cover`,
                           }}
                         ></Bg>
                       </Link>

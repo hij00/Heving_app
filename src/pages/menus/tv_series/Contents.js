@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { imgUrl } from "../../constants";
+import { imgUrl } from "../../../constants";
 import { Link } from "react-router-dom";
 import "swiper/css/navigation";
 import "swiper/css";
@@ -22,7 +22,7 @@ const ImgTitle = styled.h3`
   font-weight: 700;
 `;
 
-export const Movies = ({ movie, title }) => {
+export const Contents = ({ tvData, title }) => {
   return (
     <SMovies>
       <Title>{title}</Title>
@@ -32,7 +32,7 @@ export const Movies = ({ movie, title }) => {
         spaceBetween={50}
         slidesPerView={4.5}
       >
-        {movie.map((play) => (
+        {tvData.map((play) => (
           <SwiperSlide key={play.id}>
             <Link to={`/movie_detail/${play.id}`}>
               <Img

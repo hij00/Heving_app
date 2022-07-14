@@ -17,6 +17,7 @@ export const Home = () => {
     const movieData = async () => {
       try {
         // console.log(movieApi.genre());
+        // console.log(tvApi.onAir());
         const {
           data: { results: upData },
         } = await movieApi.upComing();

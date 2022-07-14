@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import { imgUrl, num } from "../../../constants";
-// import { useState } from "react";
+import { num, imgUrl } from "../../../constants";
 
 const Main = styled.section`
   width: 100%;
@@ -40,7 +39,7 @@ const Bg = styled.div`
   background: linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
 `;
 
-export const Banner = ({ play, up, tvPop }) => {
+export const Banner = ({ tvPop }) => {
   // const [show, setShow] = useState("none");
 
   // const handleClick = () => {
@@ -48,6 +47,7 @@ export const Banner = ({ play, up, tvPop }) => {
   //   // 클릭했을때 적용 안되면 콘솔로 아무거나 찍어서 이벤트가 적용되는지 확인해보기
   //   setShow("block");
   // };
+  // console.log(tvPop[num]);
 
   return (
     <>
@@ -56,15 +56,15 @@ export const Banner = ({ play, up, tvPop }) => {
           <Movie
             style={{
               background: `url(${
-                play[num].backdrop_path
-                  ? `${imgUrl}${play[num].backdrop_path}`
+                tvPop[0].backdrop_path
+                  ? `${imgUrl}${tvPop[0].backdrop_path}`
                   : "https://mapandan.gov.ph/wp-content/uploads/2018/03/no_image.jpg"
               }) no-repeat center / cover`,
             }}
           >
             <TextWrap>
-              <Title>{play[num].title}</Title>
-              <Desc>{play[num].release_date}</Desc>
+              <Title>{tvPop[num].name}</Title>
+              <Desc>{tvPop[num].first_air_date}</Desc>
               {/* 장르를 적을때 아이디로 표시되있는거 글로 바꾸는 방법 */}
             </TextWrap>
             <Bg />

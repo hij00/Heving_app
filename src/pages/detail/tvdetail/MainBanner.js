@@ -39,12 +39,24 @@ const Desc = styled.h3`
 const ItemWrap = styled.ul`
   display: flex;
   align-items: center;
-  margin: 20px 0 70px 0;
+  margin: 20px 0;
 `;
 const Item = styled.li`
   font-size: 16px;
   font-weight: 700;
   margin-right: 20px;
+  margin-bottom: 10px;
+  opacity: 0.7;
+  display: flex;
+  justify-content: space-between;
+`;
+const Text = styled.h3`
+  font-size: 18px;
+  font-weight: 500;
+  margin-right: 10px;
+  padding: 8px;
+  border: 1px solid white;
+  border-radius: 10px;
 `;
 const MenuWrap = styled.ul`
   display: flex;
@@ -71,7 +83,7 @@ const Point = styled.div`
 // const Select = styled.select``;
 // const Option = styled.option``;
 
-export const MainBanner = ({ tvDetail, seaData }) => {
+export const MainBanner = ({ tvDetail }) => {
   // const [show, setShow] = useState("none");
   // 다른 컴포넌트와 클릭이벤트 연동하는방법(예고편 보기 눌렀을때 해당페이지 뜨면서 스크롤 이동)
   // const [seaData, setSeaData] = useState();
@@ -103,6 +115,8 @@ export const MainBanner = ({ tvDetail, seaData }) => {
     });
   };
 
+  console.log(tvDetail);
+
   return (
     <>
       <ScrollTop />
@@ -112,7 +126,11 @@ export const MainBanner = ({ tvDetail, seaData }) => {
         <>
           <Bg
             style={{
-              background: `url(${imgUrl}${tvDetail.backdrop_path}) no-repeat center / cover`,
+              background: `url(${
+                tvDetail.backdrop_path
+                  ? `${imgUrl}${tvDetail.backdrop_path}`
+                  : "https://mapandan.gov.ph/wp-content/uploads/2018/03/no_image.jpg"
+              }) no-repeat center / cover`,
             }}
           >
             <BlackBg>
@@ -131,6 +149,13 @@ export const MainBanner = ({ tvDetail, seaData }) => {
                       </Form> */}
                     </ItemWrap>
                     <Desc>{tvDetail.overview}</Desc>
+                    <ItemWrap>
+                      <Item>
+                        {tvDetail.genres.map((a) => (
+                          <Text key={a.id}>{a.name}</Text>
+                        ))}
+                      </Item>
+                    </ItemWrap>
                   </TextWrap>
                 )}
               </Container>

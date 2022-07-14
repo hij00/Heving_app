@@ -37,7 +37,11 @@ export const Tvs = ({ tv, title }) => {
             <Link to={`/tv_detail/${play.id}`}>
               <Img
                 style={{
-                  background: `url(${imgUrl}${play.backdrop_path}) no-repeat center/cover`,
+                  background: `url(${
+                    play.backdrop_path
+                      ? `${imgUrl}${play.backdrop_path}`
+                      : "https://mapandan.gov.ph/wp-content/uploads/2018/03/no_image.jpg"
+                  }) no-repeat center / cover`,
                 }}
               />
               <ImgTitle>{play.name}</ImgTitle>

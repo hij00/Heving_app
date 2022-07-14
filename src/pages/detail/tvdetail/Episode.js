@@ -53,7 +53,11 @@ export const Episode = ({ seaData }) => {
             <CWrap>
               <Con
                 style={{
-                  background: `url(${imgUrl}${season.still_path}) no-repeat center/cover`,
+                  background: `url(${
+                    season.still_path
+                      ? `${imgUrl}${season.still_path}`
+                      : "https://mapandan.gov.ph/wp-content/uploads/2018/03/no_image.jpg"
+                  }) no-repeat center / cover`,
                 }}
               />
               <TextWrap>

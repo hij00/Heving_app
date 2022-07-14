@@ -4,11 +4,12 @@ import {
   faSearch,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { mainStyle } from "../styles/GlobalStyled";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Container } from "./Container";
+import { Loading } from "./Loading";
 
 const SHeader = styled.header`
   width: 100%;
@@ -86,64 +87,117 @@ export const Header = () => {
   const [top, setTop] = useState("flex");
   const [bottom, setBottom] = useState("none");
   const [bg, setBg] = useState("none");
+  const { pathname } = useLocation();
+  const [loading, setLoading] = useState(true);
 
-  const handleScroll = () => {
-    const scr = window.pageYOffset;
-    if (scr > 700) {
-      setTop("none");
-      setBottom("flex");
-      setBg("black");
-    } else {
-      setTop("flex");
-      setBottom("none");
-      setBg("none");
-    }
-  };
-  window.addEventListener("scroll", handleScroll);
+  useEffect(() => {
+    const headerH = () => {
+      try {
+        if (pathname === "/") {
+          const handleScroll = () => {
+            const scr = window.pageYOffset;
+            if (scr > 700) {
+              setTop("none");
+              setBottom("flex");
+              setBg("black");
+            } else {
+              setTop("flex");
+              setBottom("none");
+              setBg("none");
+            }
+          };
+          window.addEventListener("scroll", handleScroll);
+        }
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    headerH();
+  }, [pathname]);
+
+  // console.log(pathname !== "/");
+
+  useEffect(() => {
+    const headerC = () => {
+      try {
+        if (pathname !== "/") {
+          setBottom("flex");
+          setTop("none");
+          setBg("black");
+        }
+        setLoading(false);
+      } catch (error) {}
+    };
+    headerC();
+    // const handleScroll = () => {
+    //   const scr = window.pageYOffset;
+    //   if (scr > 700) {
+    //     setBg("black");
+    //   } else {
+    //     setTop("none");
+    //     setBottom("flex");
+    //     setBg("none");
+    //   }
+    // };
+    // window.addEventListener("scroll", handleScroll);
+  }, [pathname]);
 
   return (
-    <SHeader bgColor={bg}>
-      <Container>
-        <Wrap>
-          <Logo>
-            <Link to={"/"}>Heving</Link>
-          </Logo>
+    <>
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          <SHeader bgColor={bg}>
+            <Container>
+              <Wrap>
+                <Logo>
+                  <Link to={"/"}>Heving</Link>
+                </Logo>
 
-          <MenuWrapB bottom={bottom}>
-            <Menu>
-              <Link to={""}>최신인기</Link>
-            </Menu>
-            <Menu>
-              <Link to={"/movie_all"}>영화</Link>
-            </Menu>
-            <Menu>
-              <Link to={"/tv_all"}>TV시리즈</Link>
-            </Menu>
-          </MenuWrapB>
-          <IconWrap>
-            <SearchIcon>
-              <Link to={"/search"}>
-                <FontAwesomeIcon icon={faSearch} />
-              </Link>
-            </SearchIcon>
-            <Acc></Acc>
-          </IconWrap>
-        </Wrap>
-        <MenuWrapT top={top}>
-          <Menu>
-            <FontAwesomeIcon icon={faAngleLeft} />
-            <Text>
-              <Link to={""}>최신인기</Link>
-            </Text>
-          </Menu>
-          <Menu>
-            <Text>
-              <Link to={""}>TV시리즈</Link>
-            </Text>
-            <FontAwesomeIcon icon={faAngleRight} />
-          </Menu>
-        </MenuWrapT>
-      </Container>
-    </SHeader>
+                <MenuWrapB bottom={bottom}>
+                  <Menu>
+                    <Link to={""}>최신인기</Link>
+                  </Menu>
+                  <Menu>
+                    <Link to={"/movie_all"}>영화</Link>
+                  </Menu>
+                  <Menu>
+                    <Link to={"/tv_all"}>TV시리즈</Link>
+                  </Menu>
+                </MenuWrapB>
+                <IconWrap>
+                  <SearchIcon>
+                    <Link to={"/search"}>
+                      <FontAwesomeIcon icon={faSearch} />
+                    </Link>
+                  </SearchIcon>
+                  <Link to={"/login"}>
+                    <Acc></Acc>
+                  </Link>
+                </IconWrap>
+              </Wrap>
+              <MenuWrapT top={top}>
+                <Menu>
+                  <FontAwesomeIcon icon={faAngleLeft} />
+                  <Text>
+                    <Link to={""}>최신인기</Link>
+                  </Text>
+                </Menu>
+                <Menu>
+                  <Text>
+                    <Link to={""}>TV시리즈</Link>
+                  </Text>
+                  <FontAwesomeIcon icon={faAngleRight} />
+                </Menu>
+              </MenuWrapT>
+            </Container>
+          </SHeader>
+        </>
+      )}
+    </>
   );
 };
+
+// 패스네임, 유즈로케이션

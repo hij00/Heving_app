@@ -121,7 +121,7 @@ export const MovieDetail = () => {
     };
     detailData();
   }, []);
-  console.log(movieData);
+  // console.log(movieData);
 
   const handleClick = () => {
     // setShow("block");
@@ -141,7 +141,11 @@ export const MovieDetail = () => {
         <>
           <Poster
             style={{
-              background: `url(${imgUrl}${movieData.backdrop_path}) no-repeat center/cover`,
+              background: `url(${
+                movieData.backdrop_path
+                  ? `${imgUrl}${movieData.backdrop_path}`
+                  : "https://mapandan.gov.ph/wp-content/uploads/2018/03/no_image.jpg"
+              }) no-repeat center / cover`,
             }}
           >
             <BlackBg>
