@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { mainStyle } from "../../styles/GlobalStyled";
 
@@ -114,7 +115,9 @@ export const Login = () => {
           <Button>로그인</Button>
         </form>
 
-        <Title>비밀번호 찾기 | 회원가입</Title>
+        <Title>
+          비밀번호 찾기 | <Link to={"/join_us"}>회원가입</Link>
+        </Title>
       </TextWrap>
     </Wrap>
   );
