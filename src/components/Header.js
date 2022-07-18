@@ -81,17 +81,14 @@ const SearchIcon = styled.div``;
 
 // ===================모바일메뉴
 
-const MobileBtn = styled.div``;
-
-const CloseBtn = styled.div`
-  font-size: 30px;
-  position: absolute;
-  top: 20px;
-  right: 20px;
-`;
-
 const MenuWrapM = styled.ul`
-display: none;
+  display: none;
+  li {
+    all: unset;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
   @media screen and (max-width: 500px) {
     display: block;
     padding: ${mainStyle.mPadding};
@@ -105,18 +102,12 @@ display: none;
     align-items: flex-end;
     justify-content: space-between;
     padding-top: 40px;
-    li {
-      all: unset;
-      font-size: 18px;
-      font-weight: 700;
-      margin-bottom: 20px;
-    }
+  }
 `;
 
 export const Header = () => {
   const [bottom, setBottom] = useState("none");
   const [bg, setBg] = useState("none");
-  const [left, setLeft] = useState("100%");
   const [mbg, setMbg] = useState("none");
 
   // const { pathname } = useLocation();
@@ -192,14 +183,6 @@ export const Header = () => {
   //   }
   // };
   // window.addEventListener("scroll", handleScroll);
-
-  const handleClick = () => {
-    setLeft("0%");
-  };
-
-  const clickHandle = () => {
-    setLeft("100%");
-  };
 
   return (
     <>

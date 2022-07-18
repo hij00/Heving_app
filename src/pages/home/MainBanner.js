@@ -1,11 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
 import { imgUrl, num } from "../../constants";
-import {
-  faAngleDown,
-  faAngleLeft,
-  faAngleRight,
-} from "@fortawesome/free-solid-svg-icons";
+import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import { mainStyle } from "../../styles/GlobalStyled";
 import { Click } from "./Click";
 import { useState } from "react";

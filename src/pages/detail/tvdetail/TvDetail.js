@@ -54,13 +54,14 @@ export const TvDetail = () => {
   return (
     <>
       {/* <PageTitle title={tvDetail && tvDetail.name} /> */}
-      <ScrollTop />
+
       {loading ? (
         <Loading />
       ) : (
         <>
           {tvDetail && (
             <>
+              <ScrollTop />
               <PageTitle title={tvDetail.name} />
               <MainBanner tvDetail={tvDetail} seaData={seaData} />
               <Wrap>

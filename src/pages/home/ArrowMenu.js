@@ -1,13 +1,12 @@
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { mainStyle } from "../../styles/GlobalStyled";
 
 const MenuWrapT = styled.ul`
   width: 100%;
-  display: ${(props) => props.top};
+  display: flex;
   justify-content: space-between;
   align-items: center;
   position: absolute;
@@ -41,11 +40,9 @@ const Text = styled.h3`
 `;
 
 export const ArrowMenu = () => {
-  const [top, setTop] = useState("flex");
-
   return (
     <>
-      <MenuWrapT top={top}>
+      <MenuWrapT>
         <Menu>
           <FontAwesomeIcon icon={faAngleLeft} />
           <Text>

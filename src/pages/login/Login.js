@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { PageTitle } from "../../components/PageTitle";
 import { mainStyle } from "../../styles/GlobalStyled";
 
 const Wrap = styled.section`
@@ -61,11 +62,12 @@ const Button = styled.button`
 `;
 
 const userDb = {
-  dbUsername: "test111",
-  dbPw: "11111111",
+  dbUsername: "test",
+  dbPw: "111111",
 };
 
 export const Login = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -89,51 +91,54 @@ export const Login = () => {
       setError("pwResult", { message: "비밀번호가 일치하지 않습니다" });
     }
     if (email === dbUsername && pw === dbPw) {
-      alert("로그인 되었습니다");
+      navigate("/");
     }
   };
   // console.log(errors);
 
   return (
-    <Wrap>
-      <TextWrap>
-        <Logo>Heving</Logo>
+    <>
+      <PageTitle title="로그인" />
+      <Wrap>
+        <TextWrap>
+          <Logo>Heving</Logo>
 
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <Input
-            type="text"
-            {...register("email", {
-              required: "아이디는 필수입니다",
-              minLength: {
-                value: 6,
-                message: "아이디는 6자리 이상 작성해야합니다",
-              },
-            })}
-            placeholder="아이디를 입력해주세요"
-          ></Input>
-          {errors?.email?.message}
-          {errors?.idResult?.message}
-          <Input
-            type="password"
-            {...register("pw", {
-              required: "비밀번호는 필수입니다",
-              minLength: {
-                value: 8,
-                message: "비밀번호는 8자리 이상 작성해야합니다",
-              },
-            })}
-            placeholder="비밀번호를 입력해주세요"
-          ></Input>
-          {errors?.pw?.message}
-          {errors?.pwResult?.message}
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <Input
+              type="text"
+              {...register("email", {
+                required: "아이디는 필수입니다",
+                minLength: {
+                  value: 4,
+                  message: "아이디는 4자리 이상 작성해야합니다",
+                },
+              })}
+              placeholder="아이디를 입력해주세요"
+            ></Input>
+            {errors?.email?.message}
+            {errors?.idResult?.message}
+            <Input
+              type="password"
+              {...register("pw", {
+                required: "비밀번호는 필수입니다",
+                minLength: {
+                  value: 6,
+                  message: "비밀번호는 6자리 이상 작성해야합니다",
+                },
+              })}
+              placeholder="비밀번호를 입력해주세요"
+            ></Input>
+            {errors?.pw?.message}
+            {errors?.pwResult?.message}
 
-          <Button>로그인</Button>
-        </form>
+            <Button>로그인</Button>
+          </form>
 
-        <Title>
-          비밀번호 찾기 | <Link to={"/join_us"}>회원가입</Link>
-        </Title>
-      </TextWrap>
-    </Wrap>
+          <Title>
+            비밀번호 찾기 | <Link to={"/join_us"}>회원가입</Link>
+          </Title>
+        </TextWrap>
+      </Wrap>
+    </>
   );
 };

@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { tvApi } from "../../../api";
 import { Container } from "../../../components/Container";
 import { Loading } from "../../../components/Loading";
+import { PageTitle } from "../../../components/PageTitle";
+import { ScrollTop } from "../../../ScrollTop";
 import { Banner } from "./Banner";
 import { Contents } from "./Contents";
 
@@ -35,11 +37,17 @@ export const TvSeriesAll = () => {
         <Loading />
       ) : (
         <>
-          <Banner tvPop={tvPop} />
-          <Container>
-            <Contents tvData={tvPop} title="인기 TV시리즈" />
-            <Contents tvData={tvTop} title="인기 TV SHOW" />
-          </Container>
+          {tvPop && (
+            <>
+              <PageTitle title="TV시리즈" />
+              <ScrollTop />
+              <Banner tvPop={tvPop} />
+              <Container>
+                <Contents tvData={tvPop} title="인기 TV시리즈" />
+                <Contents tvData={tvTop} title="인기 TV SHOW" />
+              </Container>
+            </>
+          )}
         </>
       )}
     </>

@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { movieApi } from "../../../api";
 import { Container } from "../../../components/Container";
 import { Loading } from "../../../components/Loading";
+import { PageTitle } from "../../../components/PageTitle";
+import { ScrollTop } from "../../../ScrollTop";
 import { Banner } from "./Banner";
 import { Contents } from "./Contents";
 
@@ -36,11 +38,16 @@ export const MovieAll = () => {
         <Loading />
       ) : (
         <>
-          <Banner play={play} up={up} />
-
-          <Container>
-            <Contents movie={play} title="이달의 영화" />
-          </Container>
+          {play && (
+            <>
+              <PageTitle title="영화" />
+              <ScrollTop />
+              <Banner play={play} up={up} />
+              <Container>
+                <Contents movie={play} title="이달의 영화" />
+              </Container>
+            </>
+          )}
         </>
       )}
     </>

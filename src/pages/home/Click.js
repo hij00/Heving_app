@@ -71,7 +71,7 @@ export const Click = ({ play }) => {
 
       try {
         const detail = await movieApi.movieDetail(play[num].id);
-        const { data } = await detail;
+        const { data } = detail;
         setMovieData(data);
 
         setVideoData(results.length === 0 ? null : results[0].key);
