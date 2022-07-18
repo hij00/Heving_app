@@ -16,7 +16,10 @@ import { HelmetProvider } from "react-helmet-async";
 import { GlobalStyled } from "./styles/GlobalStyled";
 import { MovieAll } from "./pages/menus/movie/MovieAll";
 import { TvSeriesAll } from "./pages/menus/tv_series/TvSeriesAll";
+<<<<<<< HEAD
 import { useEffect, useState } from "react";
+=======
+>>>>>>> b483053604917099e3b4a7dd5a41b48a7dd73a80
 import { JoinUs } from "./pages/login/JoinUs";
 
 function App() {
