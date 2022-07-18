@@ -12,6 +12,9 @@ const SMovies = styled.div`
 const Title = styled.div`
   font-size: 50px;
   font-weight: 900;
+  @media screen and (max-width: 500px) {
+    font-size: 25px;
+  }
 `;
 const Img = styled.div`
   height: 250px;
@@ -23,15 +26,23 @@ const ImgTitle = styled.h3`
 `;
 
 export const Contents = ({ tvData, title }) => {
+  const params = {
+    breakpoints: {
+      320: {
+        slidesPerView: 2.2,
+        spaceBetween: 10,
+      },
+      640: {
+        slidesPerView: 5.5,
+        spaceBetween: 20,
+      },
+    },
+  };
+
   return (
     <SMovies>
       <Title>{title}</Title>
-      <Swiper
-        modules={[Navigation]}
-        navigation
-        spaceBetween={50}
-        slidesPerView={4.5}
-      >
+      <Swiper modules={[Navigation]} navigation {...params}>
         {tvData.map((play) => (
           <SwiperSlide key={play.id}>
             <Link to={`/movie_detail/${play.id}`}>

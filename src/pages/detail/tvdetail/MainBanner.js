@@ -24,17 +24,26 @@ const BlackBg = styled.div`
   justify-content: space-between;
 `;
 const TextWrap = styled.div`
-  width: 500px;
+  max-width: 500px;
   padding-top: 250px;
+  @media screen and (max-width: 500px) {
+    max-width: 400px;
+  }
 `;
 const Title = styled.h1`
   font-size: 50px;
   font-weight: 900;
+  @media screen and (max-width: 500px) {
+    font-size: 25px;
+  }
 `;
 const Desc = styled.h3`
   font-size: 18px;
   font-weight: 500;
   line-height: 30px;
+  @media screen and (max-width: 500px) {
+    font-size: 15px;
+  }
 `;
 const ItemWrap = styled.ul`
   display: flex;
@@ -57,6 +66,9 @@ const Text = styled.h3`
   padding: 8px;
   border: 1px solid white;
   border-radius: 10px;
+  @media screen and (max-width: 500px) {
+    font-size: 14px;
+  }
 `;
 const MenuWrap = styled.ul`
   display: flex;
@@ -71,6 +83,9 @@ const Menu = styled.li`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  @media screen and (max-width: 500px) {
+    font-size: 15px;
+  }
 `;
 const Point = styled.div`
   width: 150px;
@@ -78,6 +93,10 @@ const Point = styled.div`
   margin-top: 10px;
   border-radius: 30px 30px 0 0;
   background-color: ${mainStyle.logoColor};
+  @media screen and (max-width: 500px) {
+    width: 80px;
+    height: 5px;
+  }
 `;
 // const Form = styled.form``;
 // const Select = styled.select``;
@@ -115,7 +134,7 @@ export const MainBanner = ({ tvDetail }) => {
     });
   };
 
-  console.log(tvDetail);
+  // console.log(tvDetail);
 
   return (
     <>

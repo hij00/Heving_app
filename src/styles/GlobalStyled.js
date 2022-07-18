@@ -4,6 +4,7 @@ import reset from "styled-reset";
 export const mainStyle = {
   logoColor: "crimson",
   padding: "0 120px",
+  mPadding: "0 20px",
 };
 
 export const GlobalStyled = createGlobalStyle`

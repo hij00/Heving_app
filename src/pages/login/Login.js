@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { mainStyle } from "../../styles/GlobalStyled";
 
@@ -60,7 +61,7 @@ const Button = styled.button`
 `;
 
 const userDb = {
-  dbUsername: "test",
+  dbUsername: "test111",
   dbPw: "11111111",
 };
 
@@ -70,15 +71,28 @@ export const Login = () => {
     handleSubmit,
     formState: { errors },
     getValues,
+    setError,
   } = useForm({ mode: "onChange" });
 
   // console.log(errors);
 
   const onSubmit = () => {
     const { email, pw } = getValues();
+    // console.log(email, pw);
     const { dbUsername, dbPw } = userDb;
-    console.log(dbUsername, dbPw);
+    // console.log(dbUsername, dbPw);
+
+    if (email !== dbUsername) {
+      setError("idResult", { message: "아이디가 일치하지 않습니다" });
+    }
+    if (pw !== dbPw) {
+      setError("pwResult", { message: "비밀번호가 일치하지 않습니다" });
+    }
+    if (email === dbUsername && pw === dbPw) {
+      alert("로그인 되었습니다");
+    }
   };
+  // console.log(errors);
 
   return (
     <Wrap>
@@ -98,6 +112,7 @@ export const Login = () => {
             placeholder="아이디를 입력해주세요"
           ></Input>
           {errors?.email?.message}
+          {errors?.idResult?.message}
           <Input
             type="password"
             {...register("pw", {
@@ -110,11 +125,14 @@ export const Login = () => {
             placeholder="비밀번호를 입력해주세요"
           ></Input>
           {errors?.pw?.message}
+          {errors?.pwResult?.message}
 
           <Button>로그인</Button>
         </form>
 
-        <Title>비밀번호 찾기 | 회원가입</Title>
+        <Title>
+          비밀번호 찾기 | <Link to={"/join_us"}>회원가입</Link>
+        </Title>
       </TextWrap>
     </Wrap>
   );

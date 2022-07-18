@@ -5,10 +5,14 @@ import styled from "styled-components";
 import { movieApi } from "../../api";
 import { Container } from "../../components/Container";
 import { Loading } from "../../components/Loading";
+import { PageTitle } from "../../components/PageTitle";
 import { imgUrl } from "../../constants";
 
 const SearchWrap = styled.div`
   margin: 350px 0 150px 0;
+  @media screen and (max-width: 500px) {
+    margin: 300px 0 100px 0;
+  }
 `;
 
 const Form = styled.form`
@@ -41,6 +45,9 @@ const ConWrap = styled.div`
   grid-template-columns: repeat(5, 1fr);
   column-gap: 30px;
   row-gap: 50px;
+  @media screen and (max-width: 500px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 `;
 
 const Con = styled.div`
@@ -102,59 +109,62 @@ export const Search = () => {
   console.log(scMovie);
 
   return (
-    <Container>
-      <SearchWrap>
-        <Form onSubmit={handleSubmit(searchMovie)}>
-          <Input
-            {...register("search", {
-              required: "검색어를 입력하셔야 합니다.",
-              onChange() {
-                clearErrors("result");
-              },
-            })}
-            type="text"
-            placeholder="검색어를 입력해주세요"
-          />
-          {errors?.search?.message}
-        </Form>
-      </SearchWrap>
-      {loading ? (
-        <Loading />
-      ) : (
-        <>
-          {scMovie && (
-            <>
-              <ConWrap>
-                {scMovie.map((movie) => (
-                  <>
-                    <Con key={movie.id}>
-                      <Link to={`/movie_detail/${movie.id}`}>
-                        <Bg
-                          style={{
-                            background: `url(${
-                              movie.backdrop_path
-                                ? `${imgUrl}${movie.backdrop_path}`
-                                : "https://mapandan.gov.ph/wp-content/uploads/2018/03/no_image.jpg"
-                            }) no-repeat center / cover`,
-                          }}
-                        ></Bg>
-                      </Link>
+    <>
+      <PageTitle title="검색" />
+      <Container>
+        <SearchWrap>
+          <Form onSubmit={handleSubmit(searchMovie)}>
+            <Input
+              {...register("search", {
+                required: "검색어를 입력하셔야 합니다.",
+                onChange() {
+                  clearErrors("result");
+                },
+              })}
+              type="text"
+              placeholder="검색어를 입력해주세요"
+            />
+            {errors?.search?.message}
+          </Form>
+        </SearchWrap>
+        {loading ? (
+          <Loading />
+        ) : (
+          <>
+            {scMovie && (
+              <>
+                <ConWrap>
+                  {scMovie.map((movie) => (
+                    <>
+                      <Con key={movie.id}>
+                        <Link to={`/movie_detail/${movie.id}`}>
+                          <Bg
+                            style={{
+                              background: `url(${
+                                movie.backdrop_path
+                                  ? `${imgUrl}${movie.backdrop_path}`
+                                  : "https://mapandan.gov.ph/wp-content/uploads/2018/03/no_image.jpg"
+                              }) no-repeat center / cover`,
+                            }}
+                          ></Bg>
+                        </Link>
 
-                      <TextWrap>
-                        <TitleWrap>
-                          <Title>{movie.title}</Title>
-                          <Item>{movie.original_language}</Item>
-                        </TitleWrap>
-                        <Item>{movie.release_date}</Item>
-                      </TextWrap>
-                    </Con>
-                  </>
-                ))}
-              </ConWrap>
-            </>
-          )}
-        </>
-      )}
-    </Container>
+                        <TextWrap>
+                          <TitleWrap>
+                            <Title>{movie.title}</Title>
+                            <Item>{movie.original_language}</Item>
+                          </TitleWrap>
+                          <Item>{movie.release_date}</Item>
+                        </TextWrap>
+                      </Con>
+                    </>
+                  ))}
+                </ConWrap>
+              </>
+            )}
+          </>
+        )}
+      </Container>
+    </>
   );
 };

@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { tvApi } from "../../../api";
 import { Loading } from "../../../components/Loading";
+import { PageTitle } from "../../../components/PageTitle";
 import { ScrollTop } from "../../../ScrollTop";
 import { Episode } from "./Episode";
 import { MainBanner } from "./MainBanner";
@@ -43,27 +44,33 @@ export const TvDetail = () => {
         setSeaData(episodes);
         setLoading(false);
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     };
     detailData();
   }, []);
-  // console.log(seaData);
+  // console.log(tvDetail && tvDetail.name);
 
   return (
     <>
+      {/* <PageTitle title={tvDetail && tvDetail.name} /> */}
       <ScrollTop />
       {loading ? (
         <Loading />
       ) : (
         <>
-          <MainBanner tvDetail={tvDetail} seaData={seaData} />
-          <Wrap>
-            <Episode seaData={seaData} />
-          </Wrap>
-          <Wrap>
-            <Video videoData={videoData} />
-          </Wrap>
+          {tvDetail && (
+            <>
+              <PageTitle title={tvDetail.name} />
+              <MainBanner tvDetail={tvDetail} seaData={seaData} />
+              <Wrap>
+                <Episode seaData={seaData} />
+              </Wrap>
+              <Wrap>
+                <Video videoData={videoData} />
+              </Wrap>
+            </>
+          )}
         </>
       )}
     </>

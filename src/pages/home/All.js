@@ -13,6 +13,9 @@ const SMovies = styled.div`
 const Title = styled.div`
   font-size: 50px;
   font-weight: 900;
+  @media screen and (max-width: 500px) {
+    font-size: 30px;
+  }
 `;
 const Img = styled.div`
   height: 250px;
@@ -31,9 +34,15 @@ const Btn = styled.div`
   background-color: white;
   color: black;
   margin-left: 20px;
-  border-radius: 30px;
+  border-radius: 20px;
   line-height: 30px;
   cursor: pointer;
+  @media screen and (max-width: 500px) {
+    padding: 2px 10px;
+    font-size: 14px;
+    font-weight: 700;
+    border-radius: 15px;
+  }
 `;
 const Movie = styled.div`
   display: ${[(props) => props.show]};
@@ -54,6 +63,19 @@ export const All = ({ movie, tv, title }) => {
     setSshow("block");
   };
 
+  const params = {
+    breakpoints: {
+      320: {
+        slidesPerView: 2.2,
+        spaceBetween: 10,
+      },
+      640: {
+        slidesPerView: 5.5,
+        spaceBetween: 20,
+      },
+    },
+  };
+
   return (
     <SMovies>
       <BtnWrap>
@@ -62,12 +84,7 @@ export const All = ({ movie, tv, title }) => {
         <Btn onClick={clickHandle}>TV 시리즈</Btn>
       </BtnWrap>
       <Movie show={show}>
-        <Swiper
-          modules={[Navigation]}
-          navigation
-          spaceBetween={50}
-          slidesPerView={4.5}
-        >
+        <Swiper modules={[Navigation]} navigation {...params}>
           {movie.map((play) => (
             <SwiperSlide key={play.id}>
               <Link to={`/movie_detail/${play.id}`}>
@@ -87,12 +104,7 @@ export const All = ({ movie, tv, title }) => {
         </Swiper>
       </Movie>
       <Tv sshow={sshow}>
-        <Swiper
-          modules={[Navigation]}
-          navigation
-          spaceBetween={50}
-          slidesPerView={4.5}
-        >
+        <Swiper modules={[Navigation]} navigation {...params}>
           {tv.map((play) => (
             <SwiperSlide key={play.id}>
               <Link to={`/tv_detail/${play.id}`}>

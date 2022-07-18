@@ -24,11 +24,17 @@ const TextWrap = styled.div`
 `;
 const Title = styled.h1`
   font-size: 50px;
+  @media screen and (max-width: 500px) {
+    font-size: 25px;
+  }
 `;
 const Desc = styled.p`
   font-size: 22px;
   opacity: 0.7;
   margin: 10px 0 50px 0;
+  @media screen and (max-width: 500px) {
+    font-size: 15px;
+  }
 `;
 const Bg = styled.div`
   width: 100%;

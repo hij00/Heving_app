@@ -12,12 +12,18 @@ const AWrap = styled.div``;
 const CWrap = styled.div`
   display: flex;
   justify-content: baseline;
+  @media screen and (max-width: 500px) {
+    flex-direction: column;
+  }
 `;
 
 const Con = styled.div`
   width: 30%;
   height: 300px;
   margin-right: 20px;
+  @media screen and (max-width: 500px) {
+    width: 100%;
+  }
 `;
 
 const TextWrap = styled.div`
@@ -30,10 +36,21 @@ const TextWrap = styled.div`
 const Title = styled.div`
   font-size: 22px;
   font-weight: 700;
+  @media screen and (max-width: 500px) {
+    font-size: 20px;
+  }
 `;
 
 const Desc = styled.div`
   margin-bottom: 100px;
+  @media screen and (max-width: 500px) {
+    margin-bottom: 0px;
+    margin-top: 20px;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 20px;
+    opacity: 0.7;
+  }
 `;
 
 const Line = styled.div`

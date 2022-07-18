@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { movieApi } from "../../api";
 import { Container } from "../../components/Container";
 import { Loading } from "../../components/Loading";
+import { PageTitle } from "../../components/PageTitle";
 import { imgUrl } from "../../constants";
 import { ScrollTop } from "../../ScrollTop";
 import { mainStyle } from "../../styles/GlobalStyled";
@@ -33,16 +34,27 @@ const BlackBg = styled.div`
 const TextWrap = styled.div`
   max-width: 800px;
   padding-top: 250px;
+  @media screen and (max-width: 500px) {
+    padding-top: 120px;
+  }
 `;
 const Title = styled.h1`
   font-size: 50px;
   font-weight: 900;
+  @media screen and (max-width: 500px) {
+    font-size: 25px;
+  }
 `;
 const Desc = styled.h3`
   font-size: 18px;
   font-weight: 500;
   line-height: 30px;
   margin-top: 70px;
+  @media screen and (max-width: 500px) {
+    font-size: 15px;
+    line-height: 20px;
+    font-weight: 300;
+  }
 `;
 const ItemWrap = styled.ul`
   display: flex;
@@ -73,8 +85,11 @@ const Text = styled.h3`
   font-weight: 500;
   margin-right: 10px;
   padding: 8px;
-  border: 1px solid white;
+  border: 1px solid ${mainStyle.logoColor};
   border-radius: 10px;
+  @media screen and (max-width: 500px) {
+    font-size: 14px;
+  }
 `;
 const MenuWrap = styled.ul`
   display: flex;
@@ -88,6 +103,9 @@ const Menu = styled.li`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  @media screen and (max-width: 500px) {
+    font-size: 15px;
+  }
 `;
 const Point = styled.div`
   width: 150px;
@@ -95,6 +113,10 @@ const Point = styled.div`
   margin-top: 10px;
   border-radius: 30px 30px 0 0;
   background-color: ${mainStyle.logoColor};
+  @media screen and (max-width: 500px) {
+    width: 80px;
+    height: 5px;
+  }
 `;
 
 export const MovieDetail = () => {
@@ -126,7 +148,7 @@ export const MovieDetail = () => {
   const handleClick = () => {
     // setShow("block");
     window.scrollTo({
-      top: 1000,
+      top: 950,
       left: 0,
       behavior: "smooth",
     });
@@ -134,64 +156,69 @@ export const MovieDetail = () => {
 
   return (
     <>
-      <ScrollTop />
       {loading ? (
         <Loading />
       ) : (
         <>
-          <Poster
-            style={{
-              background: `url(${
-                movieData.backdrop_path
-                  ? `${imgUrl}${movieData.backdrop_path}`
-                  : "https://mapandan.gov.ph/wp-content/uploads/2018/03/no_image.jpg"
-              }) no-repeat center / cover`,
-            }}
-          >
-            <BlackBg>
+          {movieData && (
+            <>
+              <PageTitle title={movieData.title} />
+              <ScrollTop />
+              <Poster
+                style={{
+                  background: `url(${
+                    movieData.backdrop_path
+                      ? `${imgUrl}${movieData.backdrop_path}`
+                      : "https://mapandan.gov.ph/wp-content/uploads/2018/03/no_image.jpg"
+                  }) no-repeat center / cover`,
+                }}
+              >
+                <BlackBg>
+                  <Container>
+                    {movieData && (
+                      <TextWrap>
+                        <Itemm>{movieData.original_title}</Itemm>
+
+                        <Title>{movieData.title}</Title>
+
+                        <ItemWrap>
+                          <Item>{movieData.release_date}</Item>
+                          <Item>{movieData.runtime}분</Item>
+                        </ItemWrap>
+
+                        <Desc>{movieData.overview}</Desc>
+                        <ItemWrap>
+                          <Item>
+                            {movieData.genres.map((a) => (
+                              <Text key={a.id}>{a.name}</Text>
+                            ))}
+                          </Item>
+                        </ItemWrap>
+                      </TextWrap>
+                    )}
+                  </Container>
+                  <MenuWrap>
+                    <Menu onClick={handleClick}>
+                      예고편
+                      <Point />
+                    </Menu>
+                    <Menu>
+                      비슷한 컨텐츠
+                      <Point />
+                    </Menu>
+                  </MenuWrap>
+                </BlackBg>
+              </Poster>
               <Container>
-                {movieData && (
-                  <TextWrap>
-                    <Itemm>{movieData.original_title}</Itemm>
-
-                    <Title>{movieData.title}</Title>
-
-                    <ItemWrap>
-                      <Item>{movieData.release_date}</Item>
-                      <Item>{movieData.runtime}분</Item>
-                    </ItemWrap>
-
-                    <Desc>{movieData.overview}</Desc>
-                    <ItemWrap>
-                      <Item>
-                        {movieData.genres.map((a) => (
-                          <Text key={a.id}>{a.name}</Text>
-                        ))}
-                      </Item>
-                    </ItemWrap>
-                  </TextWrap>
-                )}
+                {videoData ? (
+                  <IFrame
+                    src={`https://www.youtube.com/embed/${videoData}`}
+                    allowfullscreen
+                  ></IFrame>
+                ) : null}
               </Container>
-              <MenuWrap>
-                <Menu onClick={handleClick}>
-                  예고편
-                  <Point />
-                </Menu>
-                <Menu>
-                  비슷한 컨텐츠
-                  <Point />
-                </Menu>
-              </MenuWrap>
-            </BlackBg>
-          </Poster>
-          <Container>
-            {videoData ? (
-              <IFrame
-                src={`https://www.youtube.com/embed/${videoData}`}
-                allowfullscreen
-              ></IFrame>
-            ) : null}
-          </Container>
+            </>
+          )}
         </>
       )}
     </>

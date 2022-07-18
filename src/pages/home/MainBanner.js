@@ -1,7 +1,11 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
 import { imgUrl, num } from "../../constants";
-import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
+import {
+  faAngleDown,
+  faAngleLeft,
+  faAngleRight,
+} from "@fortawesome/free-solid-svg-icons";
 import { mainStyle } from "../../styles/GlobalStyled";
 import { Click } from "./Click";
 import { useState } from "react";
@@ -16,14 +20,23 @@ const Left = styled.div`
   position: relative;
   width: 25%;
   height: 80vh;
+  @media screen and (max-width: 500px) {
+    display: none;
+  }
 `;
 const Right = styled.div`
   position: relative;
   width: 25%;
   height: 80vh;
+  @media screen and (max-width: 500px) {
+    display: none;
+  }
 `;
 const Center = styled.div`
   width: 50%;
+  @media screen and (max-width: 500px) {
+    width: 100%;
+  }
 `;
 const Cover = styled.div`
   width: 100%;
@@ -54,6 +67,9 @@ const TextWrap = styled.div`
 `;
 const Title = styled.h1`
   font-size: 50px;
+  @media screen and (max-width: 500px) {
+    font-size: 25px;
+  }
 `;
 const STitle = styled.h1`
   font-size: 30px;
@@ -65,6 +81,9 @@ const Desc = styled.p`
   font-size: 22px;
   opacity: 0.7;
   margin: 10px 0 50px 0;
+  @media screen and (max-width: 500px) {
+    font-size: 15px;
+  }
 `;
 const Bg = styled.div`
   width: 100%;

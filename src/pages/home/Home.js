@@ -2,7 +2,10 @@ import { useEffect, useState } from "react";
 import { movieApi, tvApi } from "../../api";
 import { Container } from "../../components/Container";
 import { Loading } from "../../components/Loading";
+import { PageTitle } from "../../components/PageTitle";
+import { ScrollTop } from "../../ScrollTop";
 import { All } from "./All";
+import { ArrowMenu } from "./ArrowMenu";
 import { MainBanner } from "./MainBanner";
 import { Movies } from "./Movies";
 import { Tvs } from "./Tvs";
@@ -45,13 +48,20 @@ export const Home = () => {
         <Loading />
       ) : (
         <>
-          <MainBanner play={play} up={up} tvPop={tvPop} />
+          {play && (
+            <>
+              <PageTitle title={"Home"} />
+              <ScrollTop />
+              <ArrowMenu />
+              <MainBanner play={play} up={up} tvPop={tvPop} />
 
-          <Container>
-            <All movie={play} tv={tvPop} title="최신 신작" />
-            <Movies movie={play} title="이달의 영화" />
-            <Tvs tv={tvPop} title="새로운 에피소드" />
-          </Container>
+              <Container>
+                <All movie={play} tv={tvPop} title="최신 신작" />
+                <Movies movie={play} title="이달의 영화" />
+                <Tvs tv={tvPop} title="새로운 에피소드" />
+              </Container>
+            </>
+          )}
         </>
       )}
     </>
