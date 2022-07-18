@@ -168,7 +168,7 @@ export const JoinUs = () => {
                   message: "6자리 이상 작성해야합니다",
                 },
                 validate: (value) =>
-                  password.curr === value || "비밀번호가 일치하지 않습니다",
+                  password.current === value || "비밀번호가 일치하지 않습니다",
               })}
               // validate 커스텀 지정, 값이 패스워드 커런트랑 같아야함 아니면 메세지 뜸
               placeholder="비밀번호를 한번 더 입력해주세요"
