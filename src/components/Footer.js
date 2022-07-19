@@ -1,30 +1,17 @@
 import styled from "styled-components";
 
-const Wrap = styled.section`
+const SFooter = styled.div`
+  padding: 75px 0;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 80px;
+  border-top: 1px solid #555;
+  margin-top: 150px;
 `;
-
-const Line = styled.div`
-  width: 100%;
-  height: 1px;
-  background-color: white;
-  margin-bottom: 50px;
-  opacity: 0.5;
-`;
-
-const Text = styled.h3`
-  margin-bottom: 50px;
-`;
-
 export const Footer = () => {
   return (
-    <Wrap>
-      <Line />
-      <Text>footer</Text>
-    </Wrap>
+    <SFooter>
+      <span>&copy; Choi Heejeong {new Date().getFullYear()}</span>
+    </SFooter>
   );
 };

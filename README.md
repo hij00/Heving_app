@@ -8,7 +8,7 @@
 
 - 반응형(모바일 / 웹)
 
-## Section
+## Pages
 
 ### Header
 
