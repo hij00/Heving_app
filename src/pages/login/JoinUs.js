@@ -3,7 +3,7 @@ import { mainStyle } from "../../styles/GlobalStyled";
 import { useForm } from "react-hook-form";
 import { useRef } from "react";
 import { PageTitle } from "../../components/PageTitle";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Wrap = styled.section`
   width: 100%;
@@ -105,8 +105,8 @@ export const JoinUs = () => {
 
   const onSubmit = () => {
     // console.log(data);
-    const { email, password, pw_re } = getValues();
-    const { dbEmail, dbPw, dbPwRe } = userDb;
+    const { email } = getValues();
+    const { dbEmail } = userDb;
 
     if (email !== dbEmail) {
       setError("idResult", { message: "이미 존재하는 아이디입니다" });

@@ -33,7 +33,7 @@
     "eject": "react-scripts eject",
     "deploy":"gh-pages -d build"
   },
-  "homepage": "http://hij00.github.io/heving_app",
+  "homepage": "http://hij00.github.io/Heving_app",
   "eslintConfig": {
     "extends": [
       "react-app",

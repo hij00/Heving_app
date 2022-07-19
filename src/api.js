@@ -31,6 +31,4 @@ export const tvApi = {
   tvVideo: (id) => api.get(`/tv/${id}/videos`),
   tvSeason: (tv_id, season_number) =>
     api.get(`/tv/${tv_id}/season/${season_number}`),
-  tvEpisode: (id, season_number, episode_number) =>
-    api.get(`/tv/${id}/season/${season_number}/episode/${episode_number}`),
 };

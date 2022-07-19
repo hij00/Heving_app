@@ -21,5 +21,7 @@ body{
     background-color: black;
     color: white;
     word-break: keep-all;
+    .swiper-button-prev { color: ${mainStyle.logoColor}; }
+    .swiper-button-next { color: ${mainStyle.logoColor}; }
 }
 `;
