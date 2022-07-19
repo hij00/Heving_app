@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { imgUrl } from "../../../constants";
+import { noImg, miniImg } from "../../../constants";
 import { Link } from "react-router-dom";
 import "swiper/css/navigation";
 import "swiper/css";
@@ -10,7 +10,7 @@ const SMovies = styled.div`
   margin-top: 100px;
 `;
 const Title = styled.div`
-  font-size: 50px;
+  font-size: 40px;
   font-weight: 900;
   @media screen and (max-width: 500px) {
     font-size: 25px;
@@ -50,8 +50,8 @@ export const Contents = ({ movie, title }) => {
                 style={{
                   background: `url(${
                     play.backdrop_path
-                      ? `${imgUrl}${play.backdrop_path}`
-                      : "https://mapandan.gov.ph/wp-content/uploads/2018/03/no_image.jpg"
+                      ? `${miniImg}${play.backdrop_path}`
+                      : `${noImg}`
                   }) no-repeat center / cover`,
                 }}
               />

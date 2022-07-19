@@ -15,7 +15,6 @@ export const MovieAll = () => {
   useEffect(() => {
     const movieData = async () => {
       try {
-        // console.log(movieApi.genre());
         const {
           data: { results: upData },
         } = await movieApi.upComing();
@@ -42,9 +41,10 @@ export const MovieAll = () => {
             <>
               <PageTitle title="영화" />
               <ScrollTop />
-              <Banner play={play} up={up} />
+              <Banner play={play} />
               <Container>
-                <Contents movie={play} title="이달의 영화" />
+                <Contents movie={play} title="현재 상영중" />
+                <Contents movie={up} title="계봉 예정 영화" />
               </Container>
             </>
           )}

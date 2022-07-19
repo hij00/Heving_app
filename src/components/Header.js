@@ -50,6 +50,7 @@ const MenuWrapB = styled.ul`
 
 const Menu = styled.li`
   margin-right: 50px;
+  font-size: 18px;
   &:last-child {
     margin-right: 0;
   }
@@ -74,10 +75,12 @@ const Acc = styled.div`
   border-radius: 50%;
   width: 30px;
   height: 30px;
-  margin-left: 50px;
 `;
 
 const SearchIcon = styled.div``;
+const AccountIcon = styled.div`
+  margin-left: 50px;
+`;
 
 // ===================모바일메뉴
 
@@ -102,6 +105,10 @@ const MenuWrapM = styled.ul`
     align-items: flex-end;
     justify-content: space-between;
     padding-top: 40px;
+    li {
+      font-size: 14px;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    }
   }
 `;
 
@@ -110,55 +117,7 @@ export const Header = () => {
   const [bg, setBg] = useState("none");
   const [mbg, setMbg] = useState("none");
 
-  // const { pathname } = useLocation();
-  // console.log(pathname);
-
-  // useEffect(() => {
-  //   const headerH = () => {
-  //     try {
-  //       console.log(123);
-  //       if (pathname === "/") {
-  //         const handleScroll = () => {
-  //           const scr = window.pageYOffset;
-  //           if (scr > 500) {
-  //             setTop("none");
-  //             setBottom("flex");
-  //             setBg("black");
-  //           } else {
-  //             setTop("flex");
-  //             setBottom("none");
-  //             setBg("none");
-  //           }
-  //         };
-  //         setTimeout(() => {
-  //           window.addEventListener("scroll", handleScroll);
-  //         }, 100);
-  //       } else {
-  //         console.log(234);
-  //         setTimeout(() => {
-  //           setBottom("flex");
-  //           setTop("none");
-  //           setBg("black");
-  //         }, 100);
-  //       }
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-  //   headerH();
-  // }, [pathname]);
-
-  // useEffect(() => {
-  //   if (pathname !== "/") {
-  //     setBottom("flex");
-  //     setBg("black");
-  //   } else {
-  //     setBottom("none");
-  //   }
-  // }, [pathname]);
-
   const handleScroll = () => {
-    // console.log(123);
     const scr = window.pageYOffset;
     if (scr > 300) {
       setBottom("flex");
@@ -171,18 +130,6 @@ export const Header = () => {
     }
   };
   window.addEventListener("scroll", handleScroll);
-
-  // const handleScroll = () => {
-  //   const scr = window.pageYOffset;
-  //   if (scr > 500) {
-  //     setBottom("flex");
-  //     setBg("black");
-  //   } else {
-  //     setBottom("none");
-  //     setBg("none");
-  //   }
-  // };
-  // window.addEventListener("scroll", handleScroll);
 
   return (
     <>
@@ -206,9 +153,11 @@ export const Header = () => {
               <FontAwesomeIcon icon={faSearch} />
             </Link>
           </SearchIcon>
-          <Link to={"/login"}>
-            <Acc></Acc>
-          </Link>
+          <AccountIcon>
+            <Link to={"/login"}>
+              <Acc></Acc>
+            </Link>
+          </AccountIcon>
         </IconWrap>
 
         {/* ================mobile menu */}
@@ -225,5 +174,3 @@ export const Header = () => {
     </>
   );
 };
-
-// 패스네임, 유즈로케이션

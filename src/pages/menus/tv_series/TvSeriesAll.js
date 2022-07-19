@@ -30,7 +30,7 @@ export const TvSeriesAll = () => {
     };
     tvData();
   }, []);
-  // console.log(tvTop);
+
   return (
     <>
       {loading ? (

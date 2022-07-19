@@ -1,11 +1,12 @@
 import styled from "styled-components";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { imgUrl } from "../../constants";
+import { miniImg, noImg } from "../../constants";
 import { Link } from "react-router-dom";
 import "swiper/css/navigation";
 import "swiper/css";
 import { Navigation } from "swiper";
 import { useState } from "react";
+import { mainStyle } from "../../styles/GlobalStyled";
 
 const SMovies = styled.div`
   margin-top: 100px;
@@ -24,6 +25,9 @@ const Img = styled.div`
 const ImgTitle = styled.h3`
   font-size: 18px;
   font-weight: 700;
+  @media screen and (max-width: 500px) {
+    line-height: 20px;
+  }
 `;
 const BtnWrap = styled.div`
   display: flex;
@@ -31,12 +35,20 @@ const BtnWrap = styled.div`
 `;
 const Btn = styled.div`
   padding: 5px 20px;
-  background-color: white;
-  color: black;
+  border: 1px solid white;
+  background-color: ${(props) => props.bg};
+  background-color: ${(props) => props.bbg};
+  color: ${(props) => props.txt};
+  color: ${(props) => props.ttxt};
   margin-left: 20px;
   border-radius: 20px;
   line-height: 30px;
+  opacity: 0.7;
   cursor: pointer;
+  &:hover {
+    background-color: white;
+    color: black;
+  }
   @media screen and (max-width: 500px) {
     padding: 2px 10px;
     font-size: 14px;
@@ -54,13 +66,24 @@ const Tv = styled.div`
 export const All = ({ movie, tv, title }) => {
   const [show, setShow] = useState("block");
   const [sshow, setSshow] = useState("none");
+  const [bg, setBg] = useState("none");
+  const [txt, setTxt] = useState("white");
+  const [ttxt, setTtxt] = useState("white");
+  const [bbg, setBbg] = useState("none");
+
   const handleClick = () => {
     setShow("block");
     setSshow("none");
+    setBg("white");
+    setBbg("none");
+    setTxt(`${mainStyle.logoColor}`);
   };
   const clickHandle = () => {
     setShow("none");
     setSshow("block");
+    setBbg("white");
+    setBg("none");
+    setTtxt(`${mainStyle.logoColor}`);
   };
 
   const params = {
@@ -80,8 +103,12 @@ export const All = ({ movie, tv, title }) => {
     <SMovies>
       <BtnWrap>
         <Title>{title}</Title>
-        <Btn onClick={handleClick}>영화</Btn>
-        <Btn onClick={clickHandle}>TV 시리즈</Btn>
+        <Btn onClick={handleClick} bg={bg} txt={txt}>
+          영화
+        </Btn>
+        <Btn onClick={clickHandle} bbg={bbg} ttxt={ttxt}>
+          TV 시리즈
+        </Btn>
       </BtnWrap>
       <Movie show={show}>
         <Swiper modules={[Navigation]} navigation {...params}>
@@ -92,7 +119,7 @@ export const All = ({ movie, tv, title }) => {
                   style={{
                     background: `url(${
                       play.backdrop_path
-                        ? `${imgUrl}${play.backdrop_path}`
+                        ? `${miniImg}${play.backdrop_path}`
                         : "https://mapandan.gov.ph/wp-content/uploads/2018/03/no_image.jpg"
                     }) no-repeat center / cover`,
                   }}
@@ -112,8 +139,8 @@ export const All = ({ movie, tv, title }) => {
                   style={{
                     background: `url(${
                       play.backdrop_path
-                        ? `${imgUrl}${play.backdrop_path}`
-                        : "https://mapandan.gov.ph/wp-content/uploads/2018/03/no_image.jpg"
+                        ? `${miniImg}${play.backdrop_path}`
+                        : `${noImg}`
                     }) no-repeat center / cover`,
                   }}
                 />

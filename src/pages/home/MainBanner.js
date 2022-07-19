@@ -1,11 +1,12 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
-import { imgUrl, num } from "../../constants";
+import { imgUrl, num, noImg } from "../../constants";
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import { mainStyle } from "../../styles/GlobalStyled";
 import { Click } from "./Click";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+
 const Main = styled.section`
   width: 100%;
   display: flex;
@@ -71,7 +72,6 @@ const STitle = styled.h1`
   font-size: 30px;
   opacity: 0.9;
   z-index: 10;
-  /* 가운데로 맞추는 방법 */
 `;
 const Desc = styled.p`
   font-size: 22px;
@@ -113,8 +113,6 @@ export const MainBanner = ({ play, up, tvPop }) => {
   const [show, setShow] = useState("none");
 
   const handleClick = () => {
-    // console.log(123);
-    // 클릭했을때 적용 안되면 콘솔로 아무거나 찍어서 이벤트가 적용되는지 확인해보기
     setShow("block");
   };
 
@@ -128,7 +126,7 @@ export const MainBanner = ({ play, up, tvPop }) => {
                 background: `url(${
                   up[num].backdrop_path
                     ? `${imgUrl}${up[num].backdrop_path}`
-                    : "https://mapandan.gov.ph/wp-content/uploads/2018/03/no_image.jpg"
+                    : `${noImg}`
                 }) no-repeat center / cover`,
               }}
             >
@@ -144,21 +142,19 @@ export const MainBanner = ({ play, up, tvPop }) => {
           <Movie
             style={{
               background: `url(${
-                play[num].backdrop_path
-                  ? `${imgUrl}${play[num].backdrop_path}`
-                  : "https://mapandan.gov.ph/wp-content/uploads/2018/03/no_image.jpg"
+                play[1].backdrop_path
+                  ? `${imgUrl}${play[1].backdrop_path}`
+                  : `${noImg}`
               }) no-repeat center / cover`,
             }}
             onClick={handleClick}
           >
             <TextWrap>
-              <Title>{play[num].title}</Title>
-              <Desc>{play[num].release_date}</Desc>
-              {/* 장르를 적을때 아이디로 표시되있는거 글로 바꾸는 방법 */}
+              <Title>{play[1].title}</Title>
+              <Desc>{play[1].release_date}</Desc>
             </TextWrap>
             <Bg />
             <ViewBtn onClick={handleClick}>
-              {/* 제일 위에 있어야 클릭 이벤트 적용됨 */}
               <FontAwesomeIcon icon={faAngleDown} />
             </ViewBtn>
           </Movie>
@@ -171,7 +167,7 @@ export const MainBanner = ({ play, up, tvPop }) => {
                 background: `url(${
                   tvPop[num].backdrop_path
                     ? `${imgUrl}${tvPop[num].backdrop_path}`
-                    : "https://mapandan.gov.ph/wp-content/uploads/2018/03/no_image.jpg"
+                    : `${noImg}`
                 }) no-repeat center / cover`,
               }}
             >

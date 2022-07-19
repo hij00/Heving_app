@@ -45,7 +45,6 @@ const Input = styled.input`
   padding: 10px 0;
   box-sizing: border-box;
   margin-bottom: 15px;
-  /* text-align: left; */
   & ::placeholder {
   }
 `;
@@ -99,12 +98,9 @@ export const JoinUs = () => {
   });
 
   const password = useRef({});
-  //useRef = useReference
   password.current = watch("password", "");
-  // password의 현재 입력값을 확인
 
   const onSubmit = () => {
-    // console.log(data);
     const { email } = getValues();
     const { dbEmail } = userDb;
 
@@ -114,10 +110,6 @@ export const JoinUs = () => {
       navigate("/login");
     }
   };
-
-  // console.log(errors);
-  // console.log(getValues());
-  // console.log(password);
 
   return (
     <>
@@ -170,7 +162,6 @@ export const JoinUs = () => {
                 validate: (value) =>
                   password.current === value || "비밀번호가 일치하지 않습니다",
               })}
-              // validate 커스텀 지정, 값이 패스워드 커런트랑 같아야함 아니면 메세지 뜸
               placeholder="비밀번호를 한번 더 입력해주세요"
             ></Input>
             {errors?.pw_re?.message && <Error>{errors?.pw_re?.message}</Error>}
@@ -202,16 +193,3 @@ export const JoinUs = () => {
     </>
   );
 };
-
-// label for 말고 htmlfor 사용해야함?
-
-// validate: {
-//   pw_re: (value) => {
-//     console.log(value);
-//     return value === password || "비밀번호가 일치하지 않습니다";
-//   },
-
-//   // 지정한 이름으로 값 확인하기(useRef의 변수이름과 입력한 password의 value값 비교)
-// },
-
-// 에러 메세지 띄울때도 && 사용하는 건지??

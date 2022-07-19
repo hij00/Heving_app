@@ -10,7 +10,7 @@ const MenuWrapT = styled.ul`
   justify-content: space-between;
   align-items: center;
   position: absolute;
-  top: 70px;
+  top: 80px;
   left: 0;
   z-index: 99;
   padding: ${mainStyle.padding};
@@ -29,9 +29,11 @@ const Menu = styled.li`
     color: ${mainStyle.logoColor};
     font-size: 20px;
   }
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 const Text = styled.h3`
@@ -44,16 +46,16 @@ export const ArrowMenu = () => {
     <>
       <MenuWrapT>
         <Menu>
-          <FontAwesomeIcon icon={faAngleLeft} />
-          <Text>
-            <Link to={""}>최신인기</Link>
-          </Text>
+          <Link to={"/movie_all"}>
+            <FontAwesomeIcon icon={faAngleLeft} />
+            <Text>영화</Text>
+          </Link>
         </Menu>
         <Menu>
-          <Text>
-            <Link to={"/tv_all"}>TV시리즈</Link>
-          </Text>
-          <FontAwesomeIcon icon={faAngleRight} />
+          <Link to={"/tv_all"}>
+            <Text>TV시리즈</Text>
+            <FontAwesomeIcon icon={faAngleRight} />
+          </Link>
         </Menu>
       </MenuWrapT>
     </>

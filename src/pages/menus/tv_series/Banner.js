@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { num, imgUrl } from "../../../constants";
+import { num, imgUrl, noImg } from "../../../constants";
 
 const Main = styled.section`
   width: 100%;
@@ -46,15 +46,6 @@ const Bg = styled.div`
 `;
 
 export const Banner = ({ tvPop }) => {
-  // const [show, setShow] = useState("none");
-
-  // const handleClick = () => {
-  //   // console.log(123);
-  //   // 클릭했을때 적용 안되면 콘솔로 아무거나 찍어서 이벤트가 적용되는지 확인해보기
-  //   setShow("block");
-  // };
-  // console.log(tvPop[num]);
-
   return (
     <>
       <Main>
@@ -64,7 +55,7 @@ export const Banner = ({ tvPop }) => {
               background: `url(${
                 tvPop[0].backdrop_path
                   ? `${imgUrl}${tvPop[0].backdrop_path}`
-                  : "https://mapandan.gov.ph/wp-content/uploads/2018/03/no_image.jpg"
+                  : `${noImg}`
               }) no-repeat center / cover`,
             }}
           >

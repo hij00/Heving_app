@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { tvApi } from "../api";
 import { Loading } from "../components/Loading";
-import { imgUrl, num } from "../constants";
+import { imgUrl, num, noImg } from "../constants";
 import { mainStyle } from "../styles/GlobalStyled";
 
 const Wrap = styled.section`
@@ -63,12 +63,10 @@ export const NotFound = () => {
 
   useEffect(() => {
     const tvData = async () => {
-      // console.log(tvApi.onAir());
       try {
         const {
           data: { results },
         } = await tvApi.onAir();
-        // console.log(results);
         setAir(results);
 
         setLoading(false);
@@ -88,7 +86,7 @@ export const NotFound = () => {
               background: `url(${
                 air[num].backdrop_path
                   ? `${imgUrl}${air[num].backdrop_path}`
-                  : "https://mapandan.gov.ph/wp-content/uploads/2018/03/no_image.jpg"
+                  : `${noImg}`
               }) no-repeat center / cover`,
             }}
           >

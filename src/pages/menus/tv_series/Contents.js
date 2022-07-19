@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { imgUrl } from "../../../constants";
+import { noImg, miniImg } from "../../../constants";
 import { Link } from "react-router-dom";
 import "swiper/css/navigation";
 import "swiper/css";
@@ -45,13 +45,13 @@ export const Contents = ({ tvData, title }) => {
       <Swiper modules={[Navigation]} navigation {...params}>
         {tvData.map((play) => (
           <SwiperSlide key={play.id}>
-            <Link to={`/movie_detail/${play.id}`}>
+            <Link to={`/tv_detail/${play.id}`}>
               <Img
                 style={{
                   background: `url(${
                     play.backdrop_path
-                      ? `${imgUrl}${play.backdrop_path}`
-                      : "https://mapandan.gov.ph/wp-content/uploads/2018/03/no_image.jpg"
+                      ? `${miniImg}${play.backdrop_path}`
+                      : `${noImg}`
                   }) no-repeat center / cover`,
                 }}
               />

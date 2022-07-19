@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import { Container } from "../../../components/Container";
-import { imgUrl } from "../../../constants";
+import { miniImg, noImg } from "../../../constants";
 import { mainStyle } from "../../../styles/GlobalStyled";
 
 const Wrap = styled.div`
-  padding-top: 100px;
+  padding-top: 20px;
 `;
 
 const AWrap = styled.div``;
@@ -61,33 +61,47 @@ const Line = styled.div`
   opacity: 0.3;
 `;
 
+const Text = styled.h1`
+  font-size: 40px;
+  font-weight: 900;
+  margin-top: 100px;
+  @media screen and (max-width: 500px) {
+    font-size: 25px;
+  }
+`;
+
 export const Episode = ({ seaData }) => {
   return (
-    <Container>
-      <Wrap>
-        {seaData.map((season) => (
-          <AWrap key={season.id}>
-            <CWrap>
-              <Con
-                style={{
-                  background: `url(${
-                    season.still_path
-                      ? `${imgUrl}${season.still_path}`
-                      : "https://mapandan.gov.ph/wp-content/uploads/2018/03/no_image.jpg"
-                  }) no-repeat center / cover`,
-                }}
-              />
-              <TextWrap>
-                <Title>
-                  {season.episode_number}화. {season.name}
-                </Title>
-                <Desc>{season.overview}</Desc>
-              </TextWrap>
-            </CWrap>
-            <Line />
-          </AWrap>
-        ))}
-      </Wrap>
-    </Container>
+    <>
+      {seaData && (
+        <Container>
+          <Text>에피소드</Text>
+          <Wrap>
+            {seaData.map((season) => (
+              <AWrap key={season.id}>
+                <CWrap>
+                  <Con
+                    style={{
+                      background: `url(${
+                        season.still_path
+                          ? `${miniImg}${season.still_path}`
+                          : `${noImg}`
+                      }) no-repeat center / cover`,
+                    }}
+                  />
+                  <TextWrap>
+                    <Title>
+                      {season.episode_number}화. {season.name}
+                    </Title>
+                    <Desc>{season.overview}</Desc>
+                  </TextWrap>
+                </CWrap>
+                <Line />
+              </AWrap>
+            ))}
+          </Wrap>
+        </Container>
+      )}
+    </>
   );
 };

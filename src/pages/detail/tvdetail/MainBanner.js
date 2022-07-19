@@ -2,9 +2,13 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Container } from "../../../components/Container";
 import { Loading } from "../../../components/Loading";
-import { imgUrl } from "../../../constants";
+import { imgUrl, noImg } from "../../../constants";
 import { ScrollTop } from "../../../ScrollTop";
 import { mainStyle } from "../../../styles/GlobalStyled";
+import { Link } from "react-scroll";
+import { Episode } from "./Episode";
+import { Video } from "./Video";
+import { Another } from "./Another";
 
 const Bg = styled.section`
   width: 100%;
@@ -34,7 +38,7 @@ const Title = styled.h1`
   font-size: 50px;
   font-weight: 900;
   @media screen and (max-width: 500px) {
-    font-size: 25px;
+    font-size: 30px;
   }
 `;
 const Desc = styled.h3`
@@ -64,7 +68,7 @@ const Text = styled.h3`
   font-weight: 500;
   margin-right: 10px;
   padding: 8px;
-  border: 1px solid white;
+  border: 1px solid ${mainStyle.logoColor};
   border-radius: 10px;
   @media screen and (max-width: 500px) {
     font-size: 14px;
@@ -78,11 +82,13 @@ const MenuWrap = styled.ul`
 const Menu = styled.li`
   font-size: 22px;
   font-weight: 500;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   cursor: pointer;
+  a {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
   @media screen and (max-width: 500px) {
     font-size: 15px;
   }
@@ -98,43 +104,20 @@ const Point = styled.div`
     height: 5px;
   }
 `;
-// const Form = styled.form``;
-// const Select = styled.select``;
-// const Option = styled.option``;
 
-export const MainBanner = ({ tvDetail }) => {
-  // const [show, setShow] = useState("none");
-  // 다른 컴포넌트와 클릭이벤트 연동하는방법(예고편 보기 눌렀을때 해당페이지 뜨면서 스크롤 이동)
-  // const [seaData, setSeaData] = useState();
+const Wrap = styled.div``;
+
+export const MainBanner = ({ tvDetail, seaData, videoData, pop }) => {
   const [loading, setLoading] = useState(true);
-  // const season = tvDetail.seasons;
 
   useEffect(() => {
     const seasonData = async () => {
       try {
-        // const {
-        //   data: { episodes },
-        // } = await tvApi.tvSeason(
-        //   tvDetail.id,
-        //   season.map((a) => a.season_number)
-        // );
-        // setSeaData(episodes);
         setLoading(false);
       } catch (error) {}
     };
     seasonData();
   }, []);
-
-  const handleClick = () => {
-    // setShow("block");
-    window.scrollTo({
-      top: 1000,
-      left: 0,
-      behavior: "smooth",
-    });
-  };
-
-  // console.log(tvDetail);
 
   return (
     <>
@@ -143,29 +126,22 @@ export const MainBanner = ({ tvDetail }) => {
         <Loading />
       ) : (
         <>
-          <Bg
-            style={{
-              background: `url(${
-                tvDetail.backdrop_path
-                  ? `${imgUrl}${tvDetail.backdrop_path}`
-                  : "https://mapandan.gov.ph/wp-content/uploads/2018/03/no_image.jpg"
-              }) no-repeat center / cover`,
-            }}
-          >
-            <BlackBg>
-              <Container>
-                {tvDetail && (
+          {tvDetail && (
+            <Bg
+              style={{
+                background: `url(${
+                  tvDetail.backdrop_path
+                    ? `${imgUrl}${tvDetail.backdrop_path}`
+                    : `${noImg}`
+                }) no-repeat center / cover`,
+              }}
+            >
+              <BlackBg>
+                <Container>
                   <TextWrap>
                     <Title>{tvDetail.name}</Title>
                     <ItemWrap>
                       <Item>{tvDetail.first_air_date}</Item>
-                      {/* <Form>
-                        <Select name="season">
-                          {seaData.map((play) => (
-                            <Option key={play.id}>{play.name}</Option>
-                          ))}
-                        </Select>
-                      </Form> */}
                     </ItemWrap>
                     <Desc>{tvDetail.overview}</Desc>
                     <ItemWrap>
@@ -176,24 +152,39 @@ export const MainBanner = ({ tvDetail }) => {
                       </Item>
                     </ItemWrap>
                   </TextWrap>
-                )}
-              </Container>
-              <MenuWrap>
-                <Menu>
-                  회차
-                  <Point />
-                </Menu>
-                <Menu onClick={handleClick}>
-                  예고편
-                  <Point />
-                </Menu>
-                <Menu>
-                  비슷한 컨텐츠
-                  <Point />
-                </Menu>
-              </MenuWrap>
-            </BlackBg>
-          </Bg>
+                </Container>
+                <MenuWrap>
+                  <Menu>
+                    <Link to="1" spy={true} smooth={true}>
+                      회차
+                      <Point />
+                    </Link>
+                  </Menu>
+                  <Menu>
+                    <Link to="2" spy={true} smooth={true}>
+                      예고편
+                      <Point />
+                    </Link>
+                  </Menu>
+                  <Menu>
+                    <Link to="3" spy={true} smooth={true}>
+                      비슷한 컨텐츠
+                      <Point />
+                    </Link>
+                  </Menu>
+                </MenuWrap>
+              </BlackBg>
+            </Bg>
+          )}
+          <Wrap id="1">
+            <Episode seaData={seaData} />
+          </Wrap>
+          <Wrap id="2">
+            <Video videoData={videoData} />
+          </Wrap>
+          <Wrap id="3">
+            <Another pop={pop} />
+          </Wrap>
         </>
       )}
     </>

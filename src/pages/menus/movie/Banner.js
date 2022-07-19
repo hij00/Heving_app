@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import { imgUrl, num } from "../../../constants";
-// import { useState } from "react";
+import { imgUrl, num, noImg } from "../../../constants";
 
 const Main = styled.section`
   width: 100%;
@@ -40,15 +39,7 @@ const Bg = styled.div`
   background: linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
 `;
 
-export const Banner = ({ play, up, tvPop }) => {
-  // const [show, setShow] = useState("none");
-
-  // const handleClick = () => {
-  //   // console.log(123);
-  //   // 클릭했을때 적용 안되면 콘솔로 아무거나 찍어서 이벤트가 적용되는지 확인해보기
-  //   setShow("block");
-  // };
-
+export const Banner = ({ play }) => {
   return (
     <>
       <Main>
@@ -58,7 +49,7 @@ export const Banner = ({ play, up, tvPop }) => {
               background: `url(${
                 play[num].backdrop_path
                   ? `${imgUrl}${play[num].backdrop_path}`
-                  : "https://mapandan.gov.ph/wp-content/uploads/2018/03/no_image.jpg"
+                  : `${noImg}`
               }) no-repeat center / cover`,
             }}
           >

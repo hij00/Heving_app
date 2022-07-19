@@ -6,12 +6,37 @@ import { movieApi } from "../../api";
 import { Container } from "../../components/Container";
 import { Loading } from "../../components/Loading";
 import { PageTitle } from "../../components/PageTitle";
-import { imgUrl } from "../../constants";
+import { noImg, imgUrl } from "../../constants";
+
+const SearchTitle = styled.h1`
+  margin: 250px 0 20px 0;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 50px;
+  text-align: center;
+  @media screen and (max-width: 500px) {
+    margin: 200px 0 2px 0;
+    font-size: 22px;
+  }
+`;
+
+const SearchDesc = styled.h3`
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 20px;
+  opacity: 0.6;
+  margin-bottom: 50px;
+  text-align: center;
+  @media screen and (max-width: 500px) {
+    font-size: 14px;
+    margin-bottom: 30px;
+  }
+`;
 
 const SearchWrap = styled.div`
-  margin: 350px 0 150px 0;
+  margin-bottom: 50px;
   @media screen and (max-width: 500px) {
-    margin: 300px 0 100px 0;
+    margin-bottom: 50px;
   }
 `;
 
@@ -26,7 +51,7 @@ const Input = styled.input`
   width: 100%;
   background-color: rgba(255, 255, 255, 0.7);
   border-radius: 50px;
-  padding: 20px;
+  padding: 15px;
   box-sizing: border-box;
   font-size: 20px;
   margin-bottom: 20px;
@@ -34,10 +59,15 @@ const Input = styled.input`
     font-size: 20px;
     color: black;
   }
-  /* &:required {
-    font-size: 50px;
-  } */
   color: black;
+  @media screen and (max-width: 500px) {
+    padding: 5px;
+    font-size: 16px;
+    &::placeholder {
+      font-size: 16px;
+      color: black;
+    }
+  }
 `;
 
 const ConWrap = styled.div`
@@ -50,13 +80,13 @@ const ConWrap = styled.div`
   }
 `;
 
-const Con = styled.div`
-  /* width: 200px;
-  height: 300px; */
-`;
+const Con = styled.div``;
 
 const Bg = styled.div`
   height: 400px;
+  @media screen and (max-width: 500px) {
+    height: 270px;
+  }
 `;
 
 const TextWrap = styled.div``;
@@ -69,11 +99,17 @@ const TitleWrap = styled.div`
 
 const Title = styled.h3`
   font-size: 22px;
+  @media screen and (max-width: 500px) {
+    font-size: 18px;
+  }
 `;
 
 const Item = styled.p`
   font-size: 16px;
   opacity: 0.7;
+  @media screen and (max-width: 500px) {
+    font-size: 12px;
+  }
 `;
 
 export const Search = () => {
@@ -94,7 +130,6 @@ export const Search = () => {
     const { search: term } = getValues();
     setLoading(true);
     try {
-      // console.log(await movieApi.search(term))
       const {
         data: { results },
       } = await movieApi.search(term);
@@ -106,12 +141,13 @@ export const Search = () => {
       setLoading(false);
     } catch (error) {}
   };
-  console.log(scMovie);
 
   return (
     <>
       <PageTitle title="검색" />
       <Container>
+        <SearchTitle>찾으시는 영화가 있으신가요?</SearchTitle>
+        <SearchDesc>인기 영화부터 계봉 예정 영화까지</SearchDesc>
         <SearchWrap>
           <Form onSubmit={handleSubmit(searchMovie)}>
             <Input
@@ -135,29 +171,27 @@ export const Search = () => {
               <>
                 <ConWrap>
                   {scMovie.map((movie) => (
-                    <>
-                      <Con key={movie.id}>
-                        <Link to={`/movie_detail/${movie.id}`}>
-                          <Bg
-                            style={{
-                              background: `url(${
-                                movie.backdrop_path
-                                  ? `${imgUrl}${movie.backdrop_path}`
-                                  : "https://mapandan.gov.ph/wp-content/uploads/2018/03/no_image.jpg"
-                              }) no-repeat center / cover`,
-                            }}
-                          ></Bg>
-                        </Link>
+                    <Con key={movie.id}>
+                      <Link to={`/movie_detail/${movie.id}`}>
+                        <Bg
+                          style={{
+                            background: `url(${
+                              movie.backdrop_path
+                                ? `${imgUrl}${movie.backdrop_path}`
+                                : `${noImg}`
+                            }) no-repeat center / cover`,
+                          }}
+                        ></Bg>
+                      </Link>
 
-                        <TextWrap>
-                          <TitleWrap>
-                            <Title>{movie.title}</Title>
-                            <Item>{movie.original_language}</Item>
-                          </TitleWrap>
-                          <Item>{movie.release_date}</Item>
-                        </TextWrap>
-                      </Con>
-                    </>
+                      <TextWrap>
+                        <TitleWrap>
+                          <Title>{movie.title}</Title>
+                          <Item>{movie.original_language}</Item>
+                        </TitleWrap>
+                        <Item>{movie.release_date}</Item>
+                      </TextWrap>
+                    </Con>
                   ))}
                 </ConWrap>
               </>

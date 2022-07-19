@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import { movieApi } from "../../api";
-import { Container } from "../../components/Container";
-import { Loading } from "../../components/Loading";
-import { PageTitle } from "../../components/PageTitle";
-import { imgUrl } from "../../constants";
-import { ScrollTop } from "../../ScrollTop";
-import { mainStyle } from "../../styles/GlobalStyled";
+import { movieApi } from "../../../api";
+import { Container } from "../../../components/Container";
+import { Loading } from "../../../components/Loading";
+import { PageTitle } from "../../../components/PageTitle";
+import { imgUrl, noImg } from "../../../constants";
+import { ScrollTop } from "../../../ScrollTop";
+import { mainStyle } from "../../../styles/GlobalStyled";
+import { Video } from "./Video";
+import { Link } from "react-scroll";
+import { Another } from "./Another";
 
 const IFrame = styled.iframe`
   width: 100%;
@@ -42,7 +45,7 @@ const Title = styled.h1`
   font-size: 50px;
   font-weight: 900;
   @media screen and (max-width: 500px) {
-    font-size: 25px;
+    font-size: 30px;
   }
 `;
 const Desc = styled.h3`
@@ -99,10 +102,12 @@ const MenuWrap = styled.ul`
 const Menu = styled.li`
   font-size: 22px;
   font-weight: 500;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  a {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
   @media screen and (max-width: 500px) {
     font-size: 15px;
   }
@@ -119,12 +124,14 @@ const Point = styled.div`
   }
 `;
 
+const Wrap = styled.div``;
+
 export const MovieDetail = () => {
   const [movieData, setMovieData] = useState();
   const [videoData, setVideoData] = useState();
+  const [now, setNow] = useState();
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
-  // const [show, setShow] = useState("block");
 
   useEffect(() => {
     const detailData = async () => {
@@ -136,6 +143,11 @@ export const MovieDetail = () => {
         const { data: detail } = await movieApi.movieDetail(id);
         setMovieData(detail);
 
+        const {
+          data: { results: now },
+        } = await movieApi.nowPlaying();
+        setNow(now);
+
         setVideoData(results.length === 0 ? null : results[0].key);
 
         setLoading(false);
@@ -143,17 +155,7 @@ export const MovieDetail = () => {
     };
     detailData();
   }, []);
-  // console.log(movieData);
-
-  const handleClick = () => {
-    // setShow("block");
-    window.scrollTo({
-      top: 950,
-      left: 0,
-      behavior: "smooth",
-    });
-  };
-
+  console.log(now);
   return (
     <>
       {loading ? (
@@ -169,7 +171,7 @@ export const MovieDetail = () => {
                   background: `url(${
                     movieData.backdrop_path
                       ? `${imgUrl}${movieData.backdrop_path}`
-                      : "https://mapandan.gov.ph/wp-content/uploads/2018/03/no_image.jpg"
+                      : `${noImg}`
                   }) no-repeat center / cover`,
                 }}
               >
@@ -198,25 +200,27 @@ export const MovieDetail = () => {
                     )}
                   </Container>
                   <MenuWrap>
-                    <Menu onClick={handleClick}>
-                      예고편
-                      <Point />
+                    <Menu>
+                      <Link to="1" spy={true} smooth={true}>
+                        예고편
+                        <Point />
+                      </Link>
                     </Menu>
                     <Menu>
-                      비슷한 컨텐츠
-                      <Point />
+                      <Link to="2" spy={true} smooth={true}>
+                        다른 컨텐츠
+                        <Point />
+                      </Link>
                     </Menu>
                   </MenuWrap>
                 </BlackBg>
               </Poster>
-              <Container>
-                {videoData ? (
-                  <IFrame
-                    src={`https://www.youtube.com/embed/${videoData}`}
-                    allowfullscreen
-                  ></IFrame>
-                ) : null}
-              </Container>
+              <Wrap id="1">
+                <Video videoData={videoData} />
+              </Wrap>
+              <Wrap id="2">
+                <Another now={now} />
+              </Wrap>
             </>
           )}
         </>

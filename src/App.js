@@ -1,7 +1,7 @@
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
-import { MovieDetail } from "./pages/detail/MovieDetail";
+import { MovieDetail } from "./pages/detail/movieDetail/MovieDetail";
 import { TvDetail } from "./pages/detail/tvdetail/TvDetail";
 import { Home } from "./pages/home/Home";
 import { Login } from "./pages/login/Login";
@@ -12,6 +12,7 @@ import { GlobalStyled } from "./styles/GlobalStyled";
 import { MovieAll } from "./pages/menus/movie/MovieAll";
 import { TvSeriesAll } from "./pages/menus/tv_series/TvSeriesAll";
 import { JoinUs } from "./pages/login/JoinUs";
+import { TopBtn } from "./components/TopBtn";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/join_us" element={<JoinUs />} />
         </Routes>
+        <TopBtn />
         <Footer />
       </Router>
     </HelmetProvider>
