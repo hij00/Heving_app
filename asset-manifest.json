@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/Heving_app/static/css/main.0b187b27.css",
-    "main.js": "/Heving_app/static/js/main.1ebdfe99.js",
+    "main.js": "/Heving_app/static/js/main.77efeefc.js",
     "index.html": "/Heving_app/index.html",
     "main.0b187b27.css.map": "/Heving_app/static/css/main.0b187b27.css.map",
-    "main.1ebdfe99.js.map": "/Heving_app/static/js/main.1ebdfe99.js.map"
+    "main.77efeefc.js.map": "/Heving_app/static/js/main.77efeefc.js.map"
   },
   "entrypoints": [
     "static/css/main.0b187b27.css",
-    "static/js/main.1ebdfe99.js"
+    "static/js/main.77efeefc.js"
   ]
 }
