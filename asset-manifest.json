@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/heving_app/static/css/main.0b187b27.css",
+    "main.js": "/heving_app/static/js/main.17429d4a.js",
+    "index.html": "/heving_app/index.html",
+    "main.0b187b27.css.map": "/heving_app/static/css/main.0b187b27.css.map",
+    "main.17429d4a.js.map": "/heving_app/static/js/main.17429d4a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0b187b27.css",
+    "static/js/main.17429d4a.js"
+  ]
+}
