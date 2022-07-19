@@ -48,26 +48,28 @@ const Bg = styled.div`
 export const Banner = ({ tvPop }) => {
   return (
     <>
-      <Main>
-        <Center>
-          <Movie
-            style={{
-              background: `url(${
-                tvPop[0].backdrop_path
-                  ? `${imgUrl}${tvPop[0].backdrop_path}`
-                  : `${noImg}`
-              }) no-repeat center / cover`,
-            }}
-          >
-            <TextWrap>
-              <Title>{tvPop[num].name}</Title>
-              <Desc>{tvPop[num].first_air_date}</Desc>
-              {/* 장르를 적을때 아이디로 표시되있는거 글로 바꾸는 방법 */}
-            </TextWrap>
-            <Bg />
-          </Movie>
-        </Center>
-      </Main>
+      {tvPop && (
+        <Main>
+          <Center>
+            <Movie
+              style={{
+                background: `url(${
+                  tvPop[0].backdrop_path
+                    ? `${imgUrl}${tvPop[0].backdrop_path}`
+                    : `${noImg}`
+                }) no-repeat center / cover`,
+              }}
+            >
+              <TextWrap>
+                <Title>{tvPop[num].name}</Title>
+                <Desc>{tvPop[num].first_air_date}</Desc>
+                {/* 장르를 적을때 아이디로 표시되있는거 글로 바꾸는 방법 */}
+              </TextWrap>
+              <Bg />
+            </Movie>
+          </Center>
+        </Main>
+      )}
     </>
   );
 };

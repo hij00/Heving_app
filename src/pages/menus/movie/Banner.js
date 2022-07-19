@@ -42,26 +42,28 @@ const Bg = styled.div`
 export const Banner = ({ play }) => {
   return (
     <>
-      <Main>
-        <Center>
-          <Movie
-            style={{
-              background: `url(${
-                play[num].backdrop_path
-                  ? `${imgUrl}${play[num].backdrop_path}`
-                  : `${noImg}`
-              }) no-repeat center / cover`,
-            }}
-          >
-            <TextWrap>
-              <Title>{play[num].title}</Title>
-              <Desc>{play[num].release_date}</Desc>
-              {/* 장르를 적을때 아이디로 표시되있는거 글로 바꾸는 방법 */}
-            </TextWrap>
-            <Bg />
-          </Movie>
-        </Center>
-      </Main>
+      {play && (
+        <Main>
+          <Center>
+            <Movie
+              style={{
+                background: `url(${
+                  play[num].backdrop_path
+                    ? `${imgUrl}${play[num].backdrop_path}`
+                    : `${noImg}`
+                }) no-repeat center / cover`,
+              }}
+            >
+              <TextWrap>
+                <Title>{play[num].title}</Title>
+                <Desc>{play[num].release_date}</Desc>
+                {/* 장르를 적을때 아이디로 표시되있는거 글로 바꾸는 방법 */}
+              </TextWrap>
+              <Bg />
+            </Movie>
+          </Center>
+        </Main>
+      )}
     </>
   );
 };

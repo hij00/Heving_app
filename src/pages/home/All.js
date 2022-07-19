@@ -34,6 +34,8 @@ const BtnWrap = styled.div`
   align-items: baseline;
 `;
 const Btn = styled.div`
+  font-size: 18px;
+  font-weight: 700;
   padding: 5px 20px;
   border: 1px solid white;
   background-color: ${(props) => props.bg};
@@ -77,12 +79,14 @@ export const All = ({ movie, tv, title }) => {
     setBg("white");
     setBbg("none");
     setTxt(`${mainStyle.logoColor}`);
+    setTtxt("white");
   };
   const clickHandle = () => {
     setShow("none");
     setSshow("block");
     setBbg("white");
     setBg("none");
+    setTxt("white");
     setTtxt(`${mainStyle.logoColor}`);
   };
 
@@ -100,56 +104,60 @@ export const All = ({ movie, tv, title }) => {
   };
 
   return (
-    <SMovies>
-      <BtnWrap>
-        <Title>{title}</Title>
-        <Btn onClick={handleClick} bg={bg} txt={txt}>
-          영화
-        </Btn>
-        <Btn onClick={clickHandle} bbg={bbg} ttxt={ttxt}>
-          TV 시리즈
-        </Btn>
-      </BtnWrap>
-      <Movie show={show}>
-        <Swiper modules={[Navigation]} navigation {...params}>
-          {movie.map((play) => (
-            <SwiperSlide key={play.id}>
-              <Link to={`/movie_detail/${play.id}`}>
-                <Img
-                  style={{
-                    background: `url(${
-                      play.backdrop_path
-                        ? `${miniImg}${play.backdrop_path}`
-                        : "https://mapandan.gov.ph/wp-content/uploads/2018/03/no_image.jpg"
-                    }) no-repeat center / cover`,
-                  }}
-                />
-                <ImgTitle>{play.title}</ImgTitle>
-              </Link>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </Movie>
-      <Tv sshow={sshow}>
-        <Swiper modules={[Navigation]} navigation {...params}>
-          {tv.map((play) => (
-            <SwiperSlide key={play.id}>
-              <Link to={`/tv_detail/${play.id}`}>
-                <Img
-                  style={{
-                    background: `url(${
-                      play.backdrop_path
-                        ? `${miniImg}${play.backdrop_path}`
-                        : `${noImg}`
-                    }) no-repeat center / cover`,
-                  }}
-                />
-                <ImgTitle>{play.name}</ImgTitle>
-              </Link>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </Tv>
-    </SMovies>
+    <>
+      {movie && (
+        <SMovies>
+          <BtnWrap>
+            <Title>{title}</Title>
+            <Btn onClick={handleClick} bg={bg} txt={txt}>
+              영화
+            </Btn>
+            <Btn onClick={clickHandle} bbg={bbg} ttxt={ttxt}>
+              TV 시리즈
+            </Btn>
+          </BtnWrap>
+          <Movie show={show}>
+            <Swiper modules={[Navigation]} navigation {...params}>
+              {movie.map((play) => (
+                <SwiperSlide key={play.id}>
+                  <Link to={`/movie_detail/${play.id}`}>
+                    <Img
+                      style={{
+                        background: `url(${
+                          play.backdrop_path
+                            ? `${miniImg}${play.backdrop_path}`
+                            : "https://mapandan.gov.ph/wp-content/uploads/2018/03/no_image.jpg"
+                        }) no-repeat center / cover`,
+                      }}
+                    />
+                    <ImgTitle>{play.title}</ImgTitle>
+                  </Link>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </Movie>
+          <Tv sshow={sshow}>
+            <Swiper modules={[Navigation]} navigation {...params}>
+              {tv.map((play) => (
+                <SwiperSlide key={play.id}>
+                  <Link to={`/tv_detail/${play.id}`}>
+                    <Img
+                      style={{
+                        background: `url(${
+                          play.backdrop_path
+                            ? `${miniImg}${play.backdrop_path}`
+                            : `${noImg}`
+                        }) no-repeat center / cover`,
+                      }}
+                    />
+                    <ImgTitle>{play.name}</ImgTitle>
+                  </Link>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </Tv>
+        </SMovies>
+      )}
+    </>
   );
 };

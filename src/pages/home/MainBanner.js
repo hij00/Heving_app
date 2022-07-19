@@ -118,70 +118,75 @@ export const MainBanner = ({ play, up, tvPop }) => {
 
   return (
     <>
-      <Main>
-        <Left>
-          <Link to={"/movie_all"}>
-            <UpComing
-              style={{
-                background: `url(${
-                  up[num].backdrop_path
-                    ? `${imgUrl}${up[num].backdrop_path}`
-                    : `${noImg}`
-                }) no-repeat center / cover`,
-              }}
-            >
-              <Cover />
-              <TextWrap>
-                <STitle>{up[num].title}</STitle>
-                <Desc>{up[num].release_date}</Desc>
-              </TextWrap>
-            </UpComing>
-          </Link>
-        </Left>
-        <Center>
-          <Movie
-            style={{
-              background: `url(${
-                play[1].backdrop_path
-                  ? `${imgUrl}${play[1].backdrop_path}`
-                  : `${noImg}`
-              }) no-repeat center / cover`,
-            }}
-            onClick={handleClick}
-          >
-            <TextWrap>
-              <Title>{play[1].title}</Title>
-              <Desc>{play[1].release_date}</Desc>
-            </TextWrap>
-            <Bg />
-            <ViewBtn onClick={handleClick}>
-              <FontAwesomeIcon icon={faAngleDown} />
-            </ViewBtn>
-          </Movie>
-        </Center>
-        <Right>
-          <Link to={"/tv_all"}>
-            <Cover />
-            <Tv
-              style={{
-                background: `url(${
-                  tvPop[num].backdrop_path
-                    ? `${imgUrl}${tvPop[num].backdrop_path}`
-                    : `${noImg}`
-                }) no-repeat center / cover`,
-              }}
-            >
-              <TextWrap>
-                <STitle>{tvPop[num].name}</STitle>
-                <Desc>{tvPop[num].first_air_date}</Desc>
-              </TextWrap>
-            </Tv>
-          </Link>
-        </Right>
-      </Main>
-      <View show={show}>
-        <Click play={play} />
-      </View>
+      {play && (
+        <>
+          {" "}
+          <Main>
+            <Left>
+              <Link to={"/movie_all"}>
+                <UpComing
+                  style={{
+                    background: `url(${
+                      up[num].backdrop_path
+                        ? `${imgUrl}${up[num].backdrop_path}`
+                        : `${noImg}`
+                    }) no-repeat center / cover`,
+                  }}
+                >
+                  <Cover />
+                  <TextWrap>
+                    <STitle>{up[num].title}</STitle>
+                    <Desc>{up[num].release_date}</Desc>
+                  </TextWrap>
+                </UpComing>
+              </Link>
+            </Left>
+            <Center>
+              <Movie
+                style={{
+                  background: `url(${
+                    play[1].backdrop_path
+                      ? `${imgUrl}${play[1].backdrop_path}`
+                      : `${noImg}`
+                  }) no-repeat center / cover`,
+                }}
+                onClick={handleClick}
+              >
+                <TextWrap>
+                  <Title>{play[1].title}</Title>
+                  <Desc>{play[1].release_date}</Desc>
+                </TextWrap>
+                <Bg />
+                <ViewBtn onClick={handleClick}>
+                  <FontAwesomeIcon icon={faAngleDown} />
+                </ViewBtn>
+              </Movie>
+            </Center>
+            <Right>
+              <Link to={"/tv_all"}>
+                <Cover />
+                <Tv
+                  style={{
+                    background: `url(${
+                      tvPop[num].backdrop_path
+                        ? `${imgUrl}${tvPop[num].backdrop_path}`
+                        : `${noImg}`
+                    }) no-repeat center / cover`,
+                  }}
+                >
+                  <TextWrap>
+                    <STitle>{tvPop[num].name}</STitle>
+                    <Desc>{tvPop[num].first_air_date}</Desc>
+                  </TextWrap>
+                </Tv>
+              </Link>
+            </Right>
+          </Main>
+          <View show={show}>
+            <Click play={play} />
+          </View>
+        </>
+      )}
     </>
   );
 };

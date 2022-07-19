@@ -40,27 +40,31 @@ export const Contents = ({ tvData, title }) => {
   };
 
   return (
-    <SMovies>
-      <Title>{title}</Title>
-      <Swiper modules={[Navigation]} navigation {...params}>
-        {tvData.map((play) => (
-          <SwiperSlide key={play.id}>
-            <Link to={`/tv_detail/${play.id}`}>
-              <Img
-                style={{
-                  background: `url(${
-                    play.backdrop_path
-                      ? `${miniImg}${play.backdrop_path}`
-                      : `${noImg}`
-                  }) no-repeat center / cover`,
-                }}
-              />
-              <ImgTitle>{play.title}</ImgTitle>
-              <ImgTitle>{play.name}</ImgTitle>
-            </Link>
-          </SwiperSlide>
-        ))}
-      </Swiper>
-    </SMovies>
+    <>
+      {tvData && (
+        <SMovies>
+          <Title>{title}</Title>
+          <Swiper modules={[Navigation]} navigation {...params}>
+            {tvData.map((play) => (
+              <SwiperSlide key={play.id}>
+                <Link to={`/tv_detail/${play.id}`}>
+                  <Img
+                    style={{
+                      background: `url(${
+                        play.backdrop_path
+                          ? `${miniImg}${play.backdrop_path}`
+                          : `${noImg}`
+                      }) no-repeat center / cover`,
+                    }}
+                  />
+                  <ImgTitle>{play.title}</ImgTitle>
+                  <ImgTitle>{play.name}</ImgTitle>
+                </Link>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </SMovies>
+      )}
+    </>
   );
 };
